@@ -1,0 +1,6 @@
+---
+ topic: provatopic
+ function: provafun
+ key: temperatura
+ outTopic: provaouttopic
+ outFormat: json
