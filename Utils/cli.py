@@ -5,7 +5,7 @@ import argparse
 class CLI:
     def __init__(self):
         self.parser = argparse.ArgumentParser(description="PyFunMQTT")
-        self.parser.add_argument("-c", "--configfile", default="config.yml",
+        self.parser.add_argument("-c", "--configfile", default="Tests/config.yml",
                                  help="load config file in YAML format (default: config.yml in Tests folder)")
         self.parser.add_argument("-p", "--port",
                                  help="connection port on which the broker is operating")

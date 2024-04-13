@@ -25,15 +25,15 @@ mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
 mqttc.on_publish = on_publish
 
 mqttc.user_data_set(unacked_publish)
-mqttc.connect("mqtt.eclipseprojects.io")
+mqttc.connect("localhost")
 mqttc.loop_start()
 
 for i in range(200):
     # Our application produce some messages
-    msg_info = mqttc.publish("paho/test/topic", i+". my message", qos=1)
+    msg_info = mqttc.publish("paho/test/topic", "{}. my message".format(i), qos=1)
     unacked_publish.add(msg_info.mid)
 
-    msg_info2 = mqttc.publish("paho/test/topic", i+". my message2", qos=1)
+    msg_info2 = mqttc.publish("paho/test/topic", "{}. my message2".format(i), qos=1)
     unacked_publish.add(msg_info2.mid)
 
 # Wait for all message to be published
