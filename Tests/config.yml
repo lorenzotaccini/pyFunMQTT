@@ -1,6 +1,8 @@
 ---
- topic: provatopic
- function: fun1
- key: temperatura
+ topic: ciao/#
+ function:
+  - fun1
+  - fun2
  outTopic: provaouttopic
+ key: ciao
  outFormat: json
