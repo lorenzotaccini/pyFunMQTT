@@ -13,8 +13,8 @@ class MethodToolBox:
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="This tool allows you to search for a function in the toolbox "
-                                                 "directly from command line, to check its presence.")
+    parser = argparse.ArgumentParser(description="Simple CLI tool to check whether a method with given name is in the "
+                                                 "Methods ToolBox or not.")
     parser.add_argument("method_name", metavar='M',
                         help="name of the method you want to search in the toolbox")
     method_name = parser.parse_args().method_name
