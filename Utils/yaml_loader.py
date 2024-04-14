@@ -2,7 +2,6 @@ import sys
 
 import yaml as y
 import cli as cli
-import inspect
 import re
 
 
@@ -18,7 +17,7 @@ class YamlLoader:
                     yamlres = y.safe_load(stream)
                     print("successfully loaded YAML config file")
                     return yamlres
-                except y.YAMLError as exc:
+                except y.YAMLError as exc:  # exception on YAML syntax
                     if hasattr(exc, 'problem_mark'):
                         print(f"Error in YAML file {stream.name}, line {exc.problem_mark.line + 1}")
                     else:
@@ -27,13 +26,12 @@ class YamlLoader:
             print("config file not found, maybe incorrect path?")
 
     # class method to check correct fields spelling and presence
-    @classmethod
-    def check_structure(cls, yaml_content: dict) -> bool:
+    @staticmethod
+    def check_structure(yaml_content: dict) -> bool:
         topic_matcher = r"^([a-zA-Z0-9_\-#]+/?)*[a-zA-Z0-9_\-#]+$"
         function_matcher = r"^([a-zA-Z0-9_\-])+$"
         key_matcher = r"^([a-zA-Z0-9_\-])+$"
         out_format_matcher = ['json', 'yaml', 'xml']
-
         # catches and enlightens missing keys from YAML file
         try:
             # check input topic
