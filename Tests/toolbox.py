@@ -1,9 +1,19 @@
-class MethodToolBox:
-    def fun1(self):
-        print("fun1!")
+import sys
 
-    def fun2(self):
-        print("fun2!")
+
+#OLD VERSION
+
+import user_functions as uf
+import inspect
+
+
+# class that contains
+class MethodToolBox:
+    def __init__(self):
+        self.classes = [cls_name for cls_name, cls_obj in inspect.getmembers(uf) if inspect.isclass(cls_obj)]
+        self.methods = [func_name for func_name, func_obj in inspect.getmembers(uf) if inspect.ismethod(func_obj)]
+        print(self.classes)
+
 
     @classmethod
     def is_in_toolbox(cls, fun_name: str) -> bool:

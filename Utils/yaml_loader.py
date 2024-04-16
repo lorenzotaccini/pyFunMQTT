@@ -23,7 +23,7 @@ class YamlLoader:
                     else:
                         print(exc)
         except FileNotFoundError:
-            print("config file not found, maybe incorrect path?")
+            print("Config file not found, maybe incorrect path?")
 
     # class method to check correct fields spelling and presence
     @staticmethod
@@ -80,4 +80,5 @@ class YamlLoader:
 if __name__ == "__main__":
     yl = YamlLoader()
     confstruct = yl.load()
+    print(confstruct)
     YamlLoader.check_structure(confstruct)
