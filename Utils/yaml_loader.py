@@ -1,7 +1,6 @@
 import sys
-
 import yaml as y
-import cli as cli
+import Utils.cli as cli
 import re
 
 
@@ -15,7 +14,7 @@ class YamlLoader:
             with open(self.configfile) as stream:
                 try:
                     yamlres = y.safe_load(stream)
-                    print("successfully loaded YAML config file")
+                    print("successfully loaded YAML config file: "+self.configfile)
                     return yamlres
                 except y.YAMLError as exc:  # exception on YAML syntax
                     if hasattr(exc, 'problem_mark'):
@@ -31,9 +30,10 @@ class YamlLoader:
         topic_matcher = r"^([a-zA-Z0-9_\-#]+/?)*[a-zA-Z0-9_\-#]+$"
         function_matcher = r"^([a-zA-Z0-9_\-])+$"
         key_matcher = r"^([a-zA-Z0-9_\-])+$"
-        out_format_matcher = ['json', 'yaml', 'xml']
+        in_out_format_matcher = ['json', 'yaml', 'xml']
         # catches and enlightens missing keys from YAML file
         try:
+            print("\n---- SPELL CHECKING ----")
             # check input topic
             if re.fullmatch(topic_matcher, yaml_content['topic']):
                 print("input topic correct")
@@ -51,17 +51,10 @@ class YamlLoader:
             # check function names
             for i, f in enumerate(yaml_content['function']):
                 if re.fullmatch(function_matcher, f):
-                    print(f"function {i} correct")
+                    print(f"function {i} correct: {f}")
                 else:
                     print(f"wrong format for function: {f}", file=sys.stderr)
                     return False
-
-            # check for correct output format
-            if yaml_content['outFormat'] in out_format_matcher:
-                print("output format allowed")
-            else:
-                print("wrong output format specified", file=sys.stderr)
-                return False
 
             # check for optional key value, False not returned in that case
             if 'key' in yaml_content:  # key field is optional
@@ -71,9 +64,20 @@ class YamlLoader:
                     print("wrong format for key", file=sys.stderr)
             else:
                 print("key field not present")
+
+            # check for correct output format
+            if yaml_content['outFormat'] and yaml_content['inFormat'] in in_out_format_matcher:
+                print("input and output format allowed")
+            else:
+                print("wrong i/o format specified", file=sys.stderr)
+                return False
+
         except KeyError as k:
             print(f"some required keys are missing from YAML config file: {k.args}", file=sys.stderr)
+
+
         # all checked, return True
+        print("---- END OF SPELL CHECKING ----")
         return True
 
 

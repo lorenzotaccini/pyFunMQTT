@@ -1,8 +1,10 @@
 ---
  topic: ciao/#
  function:
-  - fun1
+  - split
   - fun2
+  - ciao
  outTopic: provaouttopic
  key: ciao
  outFormat: json
+ inFormat: yaml

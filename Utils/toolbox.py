@@ -1,16 +1,15 @@
-import time
 from typing import Any
-from user_functions import Service
+from Utils.user_functions import Service
 
 
 class MethodToolBox:
 
     def __init__(self):
-        self.services = {cls.__name__: cls() for (cls) in Service.__subclasses__()}
+        self.services = {str.lower(cls.__name__): cls() for cls in Service.__subclasses__()}
 
-
-    def run(self, data: Any) -> Any:
-        print()
+    def run(self, fname: [str], data: Any) -> Any:
+        if fname in self.services.keys():
+            return self.services[fname].serve(data)
         #for s in self.services:
         #    out = s.serve(out)
         #return out
@@ -25,5 +24,6 @@ if __name__ == '__main__':
                         help="name of the method you want to search in the toolbox")
     method_name = parser.parse_args().method_name
 
-    print(f"Class {method_name} is {"not " if method_name not in MethodToolBox().services.keys() else ""}"
+    print(f"Class {str.lower(method_name)} is "
+          f"{"not " if str.lower(method_name) not in MethodToolBox().services.keys() else ""}"
           f"in Methods ToolBox")

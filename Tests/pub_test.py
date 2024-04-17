@@ -30,19 +30,19 @@ mqttc.loop_start()
 
 for i in range(200):
     # Our application produce some messages
-    msg_info = mqttc.publish("paho/test/topic", "{}. my message".format(i), qos=1)
+    msg_info = mqttc.publish("input/topic", "{}. my message".format(i), qos=1)
     unacked_publish.add(msg_info.mid)
 
-    msg_info2 = mqttc.publish("paho/test/topic", "{}. my message2".format(i), qos=1)
+    msg_info2 = mqttc.publish("input/topic", "{}. my message2".format(i), qos=1)
     unacked_publish.add(msg_info2.mid)
 
-# Wait for all message to be published
-while len(unacked_publish):
-    time.sleep(0.1)
+    # Wait for all message to be published
+    while len(unacked_publish):
+        time.sleep(0.1)
 
-# Due to race-condition described above, the following way to wait for all publish is safer
-msg_info.wait_for_publish()
-msg_info2.wait_for_publish()
+    # Due to race-condition described above, the following way to wait for all publish is safer
+    msg_info.wait_for_publish()
+    msg_info2.wait_for_publish()
 
 mqttc.disconnect()
 mqttc.loop_stop()

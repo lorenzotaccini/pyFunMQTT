@@ -3,16 +3,6 @@ from typing import Any
 
 
 class Service(ABC):
-    _registry = {}
-
-    @classmethod
-    def registry(cls):
-        return cls._registry
-
-    @classmethod
-    def __init_subclass__(cls, **kwargs):
-        super().__init_subclass__(**kwargs)
-        cls._registry[cls.__name__] = cls()
 
     @abstractmethod
     def serve(self, data: Any) -> Any:
@@ -20,8 +10,8 @@ class Service(ABC):
 
 
 class Split(Service):
-    def serve(self, data: Any):
-        pass
+    def serve(self, data: str):
+        print(list(data))
 
 
 class Merge(Service):
