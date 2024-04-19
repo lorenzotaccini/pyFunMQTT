@@ -2,6 +2,7 @@ import paho.mqtt.client as mqtt
 import json
 import queue
 import threading
+import Utils.toolbox as t
 
 # Configurazione dei broker e dei topic
 broker_address = "localhost"
@@ -19,29 +20,29 @@ def on_message(client, userdata, message):
     print(f"Received message on topic {message.topic}: {payload}")
 
     # Applica una funzione ai messaggi in arrivo
-    processed_message = process_message(payload)
+    processed_message = process_message(userdata, payload)
 
     # Aggiungi il messaggio elaborato alla coda
     message_queue.put(processed_message)
 
 
 # Funzione di esempio per elaborare il messaggio
-def process_message(payload):
-    # Esempio: converte il messaggio in maiuscolo
-    return payload.upper()
+def process_message(toolbox, payload):
+    return toolbox.run('upper', payload)
+
 
 
 # Funzione per pubblicare i messaggi dalla coda
 def publish_messages(client):
     while True:
         message = message_queue.get()
-        client.publish(output_topic, json.dumps(message))
+        client.publish(output_topic, message)
         print(f"Published message on topic {output_topic}: {message}")
         message_queue.task_done()
 
 
 # Crea un nuovo client MQTT
-client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, userdata=t.MethodToolBox())
 
 # Imposta la funzione di callback per i messaggi in arrivo
 client.on_message = on_message

@@ -38,7 +38,8 @@ for i in range(200):
 
     # Wait for all message to be published
     while len(unacked_publish):
-        time.sleep(0.1)
+        #time.sleep(0.1)
+        pass
 
     # Due to race-condition described above, the following way to wait for all publish is safer
     msg_info.wait_for_publish()

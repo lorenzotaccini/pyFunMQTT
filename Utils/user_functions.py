@@ -11,9 +11,14 @@ class Service(ABC):
 
 class Split(Service):
     def serve(self, data: str):
-        print(list(data))
+        return list(data)
 
 
 class Merge(Service):
     def serve(self, data: Any):
         print(data)
+
+
+class Upper(Service):
+    def serve(self, data: Any):
+        return str(data).upper()
