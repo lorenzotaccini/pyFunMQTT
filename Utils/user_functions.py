@@ -20,5 +20,5 @@ class Merge(Service):
 
 
 class Upper(Service):
-    def serve(self, data: Any):
+    def serve(self, data: str):
         return str(data).upper()
