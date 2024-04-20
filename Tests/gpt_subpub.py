@@ -1,8 +1,7 @@
 import paho.mqtt.client as mqtt
-import json
 import queue
 import threading
-import Utils.toolbox as t
+import Utils.UserFunctions.toolbox as t
 
 # Configurazione dei broker e dei topic
 broker_address = "localhost"
@@ -15,7 +14,7 @@ message_queue = queue.Queue()
 
 
 # Funzione per gestire i messaggi in arrivo
-def on_message(client, toolbox, message):
+def on_message(mqtt_client, toolbox, message):
     payload = message.payload.decode("utf-8")
     print(f"Received message on topic {message.topic}: {payload}")
 
@@ -41,21 +40,16 @@ def publish_messages(client):
         message_queue.task_done()
 
 
-# Crea un nuovo client MQTT
-mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, userdata=t.MethodToolBox(),protocol=mqtt.MQTTv5)
+client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, userdata=t.MethodToolBox())
 
-# Imposta la funzione di callback per i messaggi in arrivo
-mqtt_client.on_message = on_message
+client.on_message = on_message
 
-# Connettiti al broker MQTT
-mqtt_client.connect(broker_address, broker_port)
+client.connect(broker_address, broker_port)
 
-# Iscriviti al topic di input
-mqtt_client.subscribe(input_topic)
+client.subscribe(input_topic)
 
-# Avvia un thread separato per pubblicare i messaggi dalla coda
-publish_thread = threading.Thread(target=publish_messages, args=(mqtt_client,))
+publish_thread = threading.Thread(target=publish_messages, args=(client,))
 publish_thread.start()
 
-# Avvia il loop per gestire i messaggi in arrivo
-mqtt_client.loop_forever()
+
+client.loop_forever()

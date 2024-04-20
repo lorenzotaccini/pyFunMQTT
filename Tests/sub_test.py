@@ -1,8 +1,5 @@
-import functools
-
 import paho.mqtt.client as mqtt
-import Utils.input_normalizer as norm
-import Utils.toolbox as toolbox
+import Utils.OnFiles.input_normalizer as norm
 
 
 # The callback for when the client receives a CONNACK response from the server.

@@ -1,5 +1,5 @@
-from Utils.yaml_loader import YamlLoader
-from Utils.toolbox import MethodToolBox
+from Utils.OnFiles.yaml_loader import YamlLoader
+from Utils.UserFunctions.toolbox import MethodToolBox
 
 if __name__ == '__main__':
     y = YamlLoader()
