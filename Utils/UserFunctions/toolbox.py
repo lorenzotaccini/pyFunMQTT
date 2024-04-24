@@ -11,6 +11,7 @@ class MethodToolBox:
         for f in func_name:
             if f in self.services.keys():
                 data = self.services[f].serve(data)
+        return data
 
 
 if __name__ == '__main__':

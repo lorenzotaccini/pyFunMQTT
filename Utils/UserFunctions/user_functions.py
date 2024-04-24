@@ -3,15 +3,14 @@ from typing import Any
 
 
 class Service(ABC):
-
     @abstractmethod
     def serve(self, data: Any) -> Any:
         ...
 
 
-class Split(Service):
+class RemoveWS(Service):
     def serve(self, data: str):
-        return list(data)
+        return data.replace(' ', '')
 
 
 class Merge(Service):

@@ -1,11 +1,11 @@
 ---
  broker: localhost
  port: 1883
- topic: ciao/#
+ topic: input/topic
  function:
-  - split
-
- outTopic: provaouttopic
+  - removews
+  - upper
+ outTopic: output/topic
  key: ciao
  outFormat: json
  inFormat: yaml
