@@ -14,8 +14,8 @@ class YamlLoader:
             with open(self.configfile) as stream:
                 try:
                     yamlres = y.safe_load(stream)
-                    print("successfully loaded YAML config file: " + self.configfile)
                     if self.check_structure(yamlres):
+                        print("successfully loaded YAML config file: " + self.configfile)
                         return yamlres
                     else:
                         return None
@@ -25,13 +25,15 @@ class YamlLoader:
                     else:
                         print(exc)
         except FileNotFoundError:
-            print("Config file not found, maybe incorrect path?")
+            print("Config file not found, maybe incorrect path?", file=sys.stderr)
             return None
 
     # class method to check correct fields spelling and presence
     @staticmethod
     def check_structure(yaml_content: dict) -> bool:
-        required_fields = {'topic': r"^([a-zA-Z0-9_\-#]+/?)*[a-zA-Z0-9_\-#]+$",
+        required_fields = {'broker': r"^(((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4})$|^localhost$",
+                           'port': r"^(?:[1-9]\d{0,3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$",
+                           'topic': r"^([a-zA-Z0-9_\-#]+/?)*[a-zA-Z0-9_\-#]+$",
                            'outTopic': r"^([a-zA-Z0-9_\-#]+/?)*[a-zA-Z0-9_\-#]+$",
                            'function': r"^([a-zA-Z0-9_\-])+$",
                            'key': r"^([a-zA-Z0-9_\-])+$",
@@ -50,18 +52,16 @@ class YamlLoader:
 
             value = yaml_content[field]
 
-            # if
             if isinstance(value, list):
                 for v in value:
                     if not re.match(pattern, v):
                         wrong_fields.append(field)
             else:
-                if not re.match(pattern, value):
+                if not re.match(pattern, str(value)):
                     wrong_fields.append(field)
 
         if wrong_fields:
-            print(f"the following fields are wrong or missing: {wrong_fields}", file=sys.stderr, end='')
-            return False
+            raise ValueError(f"the following fields are wrong or missing: {wrong_fields}")
         else:
             print("configuration file is valid", end='')
         # all checked, return True

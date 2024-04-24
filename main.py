@@ -7,4 +7,4 @@ if __name__ == '__main__':
     YamlLoader.check_structure(config_info)
 
     m = MethodToolBox()
-    m.run(config_info['function'][0], config_info['topic'])
+    m.process(config_info['function'][0], config_info['topic'])

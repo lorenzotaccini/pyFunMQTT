@@ -7,12 +7,10 @@ class MethodToolBox:
     def __init__(self):
         self.services = {str.lower(cls.__name__): cls() for cls in Service.__subclasses__()}
 
-    def run(self, fun_name: [str], data: Any) -> Any:
-        if fun_name in self.services.keys():
-            return self.services[fun_name].serve(data)
-        # for s in self.services:
-        #    out = s.serve(out)
-        # return out
+    def process(self, func_name: [str], data: Any) -> Any:
+        for f in func_name:
+            if f in self.services.keys():
+                data = self.services[f].serve(data)
 
 
 if __name__ == '__main__':

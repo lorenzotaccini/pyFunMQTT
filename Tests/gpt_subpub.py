@@ -27,15 +27,13 @@ def on_message(mqtt_client, toolbox, message):
 
 # Funzione di esempio per elaborare il messaggio
 def process_message(toolbox, payload):
-    return toolbox.run('upper', payload)
+    return toolbox.process('upper', payload)
 
 
-
-# Funzione per pubblicare i messaggi dalla coda
-def publish_messages(client):
+def publish_messages(mqtt_client):
     while True:
         message = message_queue.get()
-        client.publish(output_topic, message)
+        mqtt_client.publish(output_topic, message)
         print(f"Published message on topic {output_topic}: {message}")
         message_queue.task_done()
 
