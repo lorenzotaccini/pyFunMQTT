@@ -1,3 +1,7 @@
+import signal
+import sys
+import time
+
 import paho.mqtt.client as mqtt
 import queue
 import threading
@@ -18,17 +22,18 @@ class MQTTClient(mqtt.Client):
         self.client.on_message = self.on_message
         self.client.on_connect = self.on_connect
 
-        # TODO completare classe, pensare al funzionamento bloccante della classe
+        self.stop_event = threading.Event()
+        self.publish_thread = threading.Thread(target=self.publish_messages)
+
+        # TODO completare, pensare al funzionamento bloccante della classe
 
     # Funzione per gestire i messaggi in arrivo
     def on_message(self, mqttc, obj, message):
         payload = message.payload.decode("utf-8")
         print(f"Received message on topic {message.topic}: {payload}")
 
-        # Applica una funzione ai messaggi in arrivo
         processed_message = self.process_message(payload)
 
-        # Aggiungi il messaggio elaborato alla coda
         self.msg_queue.put(processed_message)
 
     def on_connect(self, mqttc, obj, flags, reason_code, properties):
@@ -41,25 +46,40 @@ class MQTTClient(mqtt.Client):
     def process_message(self, payload):
         return self.toolbox.process(self.config_params.function, payload)
 
-    def publish_messages(self):
+    def publish_messages(self) -> None:
         while True:
+            if self.stop_event.is_set():
+                break
             message = self.msg_queue.get()
             self.client.publish(self.config_params.outTopic, message)
             print(f"Published message on topic {self.config_params.outTopic}: {message}")
             self.msg_queue.task_done()
 
     def start(self):
-        try:
-            publish_thread = threading.Thread(target=self.publish_messages)
-            publish_thread.start()
 
-            self.client.connect(host=self.config_params.broker)
-            self.client.loop_forever()
+        self.publish_thread.start()
+
+        try:
+            self.client.connect(host=self.config_params.broker, port=self.config_params.port)
+            self.client.loop_start()
         except OSError:
             print("First connection with the selected MQTT broker has failed, quitting.")
-            return False
+            self.stop()
+            return
+
+    # disconnect the subscriber task, waits for the queue of messages that are being processed to be empty,
+    # stops the publishing thread setting stop_event, waits for the thread to terminate
+    def stop(self, sig, frame):
+        print("stopping all workers...")
+        self.client.disconnect()
+        self.client.loop_stop()
+        self.msg_queue.join()
+        self.stop_event.set()
+        self.publish_thread.join()
+        print('all workers have stopped. Quitting...')
 
 
 if __name__ == "__main__":
     client = MQTTClient(y.YamlLoader(), t.MethodToolBox())
+    signal.signal(signal.SIGINT, client.stop)
     client.start()
