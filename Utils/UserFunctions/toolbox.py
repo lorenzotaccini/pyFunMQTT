@@ -23,6 +23,4 @@ if __name__ == '__main__':
                         help="name of the method you want to search in the toolbox")
     method_name = parser.parse_args().method_name
 
-    print(f"Class {str.lower(method_name)} is "
-          f"{"not " if str.lower(method_name) not in MethodToolBox().services.keys() else ""}"
-          f"in Methods ToolBox")
+    print(f"Class {str.lower(method_name)} is {"not " if str.lower(method_name) not in MethodToolBox().services.keys() else ""}in Methods ToolBox")
