@@ -6,14 +6,13 @@ import Utils.cli as cli
 
 
 class ConfigFileWatchdog(FileSystemEventHandler):
-    def __init__(self, run_args=cli.CLI()):
+    def __init__(self, configfile_name: str):
         super().__init__()
-        self.run_args = run_args
-        self.configfile = self.run_args.args.configfile
+        self.configfile_name = configfile_name
 
     def on_modified(self, event):
-        if event.src_path.endswith(self.configfile):
-            print(f"{time.localtime()}-> Detected changes in actual configuration file: '{self.configfile}'"
+        if event.src_path.endswith(self.configfile_name):
+            print(f"at {time.localtime()} -> Detected changes in actual configuration file: '{self.configfile_name}'"
                   f"\nReload the session applying the new configuration? [y/n]: ")
 
     def watch(self):

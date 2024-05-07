@@ -1,20 +1,18 @@
 import sys
 import yaml as y
-import Utils.cli as cli
 import re
 
 
 class YamlLoader:
-    def __init__(self, run_args: cli.CLI()):
-        self.run_args = run_args
-        self.configfile = self.run_args.args.configfile
+    def __init__(self, configfile_name: str):
+        self.configfile_name = configfile_name
 
     def load(self) -> [dict | None]:
         try:
-            with open(self.configfile) as stream:
+            with open(self.configfile_name) as stream:
                 yamlres = y.safe_load(stream)
                 if YamlLoader.check_structure(yamlres):
-                    print("successfully loaded YAML config file: " + self.configfile)
+                    print("successfully loaded YAML config file: " + self.configfile_name)
                     return yamlres
                 else:
                     print("YAML config file not loaded")
@@ -71,9 +69,3 @@ class YamlLoader:
         except ValueError:
             print(f"the following fields are wrong or missing: {wrong_fields}")
             return False
-
-
-if __name__ == "__main__":
-    yl = YamlLoader()
-    confstruct = yl.load()
-    print(confstruct)

@@ -1,13 +1,12 @@
-import signal
-import sys
-import time
-
-import paho.mqtt.client as mqtt
 import queue
+import sys
 import threading
 from types import SimpleNamespace
-import Utils.UserFunctions.toolbox as t
+
+import paho.mqtt.client as mqtt
+
 import Utils.OnFiles.yaml_loader as y
+import Utils.UserFunctions.toolbox as t
 
 QOS = 1
 CALLBACK_VERSION = mqtt.CallbackAPIVersion.VERSION2
@@ -15,9 +14,9 @@ CALLBACK_VERSION = mqtt.CallbackAPIVersion.VERSION2
 
 class MQTTClient(mqtt.Client):
 
-    def __init__(self, yl: y.YamlLoader, toolbox: t.MethodToolBox):
+    def __init__(self, yl: dict, toolbox: t.MethodToolBox):
         super().__init__(CALLBACK_VERSION)
-        self.config_params = SimpleNamespace(**yl.load())  # Simplenamespace to improve usability within the class
+        self.config_params = SimpleNamespace(**yl)  # Simplenamespace to improve usability within the class
         self.msg_queue = queue.Queue()
         self.toolbox = toolbox
 
