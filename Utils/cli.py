@@ -16,6 +16,9 @@ class CLI:
                                  help="broker's IP address (default: localhost)")
         self.parser.add_argument("-t", "--topic", default="nomedefaulttopic",
                                  help="topic on which you're listening (default: nomedefaulttopic)")
+        self.parser.add_argument("-s", "--silent", default=False, help="suppress all console output except "
+                                                                       "for when the program needs to communicate "
+                                                                       "with the user")
         self.args = self.parser.parse_args()
 
 

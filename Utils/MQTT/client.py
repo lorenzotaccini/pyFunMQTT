@@ -54,7 +54,7 @@ class MQTTClient(mqtt.Client):
     def publish_messages(self) -> None:
         while True:
             message = self.msg_queue.get()
-            if message is None:
+            if message is None:  # TODO sostituire None con valore più appropriato
                 self.msg_queue.task_done()
                 print("quitting has been requested on publishing thread")
                 return

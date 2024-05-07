@@ -5,9 +5,9 @@ import re
 
 
 class YamlLoader:
-    def __init__(self):
-        self.runargs = cli.CLI()
-        self.configfile = self.runargs.args.configfile
+    def __init__(self, run_args: cli.CLI()):
+        self.run_args = run_args
+        self.configfile = self.run_args.args.configfile
 
     def load(self) -> [dict | None]:
         try:
