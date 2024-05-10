@@ -25,6 +25,7 @@ class YamlLoader:
                 print(f"Error in YAML file {stream.name}, line {exc.problem_mark.line + 1}", file=sys.stderr)
             else:
                 print(exc)
+            sys.exit(-1)
 
     # static method to check correct fields spelling and presence
     @staticmethod

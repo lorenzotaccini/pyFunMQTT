@@ -1,4 +1,6 @@
-# class that groups all the little pieces and utilities and make them work togheter generating a definitive worker object
+# class that groups all the little pieces and utilities and make them work togheter generating a definitive worker
+# object
+import threading
 
 from Utils.MQTT.client import MQTTClient
 from Utils.OnFiles.configfile_watchdog import ConfigFileWatchdog as Wd
@@ -17,4 +19,23 @@ class MQTTWorker:
         self.mqttc = MQTTClient(self.yaml_data, self.toolbox)  # instantiate mqtt custom client (not started yet)
 
     def spawn_worker(self):
-        watchdog = Wd(self.configfile_name,)  # instantiate watchdog on config file (not started yet)
+        watchdog = Wd(self)  # instantiate watchdog on config file (not started yet)
+        watchdog_thread = threading.Thread(target=watchdog.watch)
+        watchdog_thread.start()
+        self.mqttc.start()
+
+    # reloads only necessary objects and restarts the new MQTT client. Typically called when changes are detected
+    # in the config file by the watchdog
+    def reload(self):
+        self.mqttc.stop()
+        self.yaml_data = Yl(self.configfile_name).load()
+        self.mqttc = MQTTClient(self.yaml_data, self.toolbox)
+        self.mqttc.start()
+        print("session reloaded with modified configuration file.")
+
+
+if __name__ == "__main__":
+    worker = MQTTWorker()
+    worker.spawn_worker()
+    while True:
+        pass
