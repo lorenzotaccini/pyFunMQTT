@@ -48,6 +48,7 @@ class MQTTClient(mqtt.Client):
 
     # Funzione di esempio per elaborare il messaggio
     def process_message(self, payload):
+        # TODO as of now, messages are strings and not serialized data files such as json yaml exc...
         return self.toolbox.process(self.config_params.function, payload)
 
     def publish_messages(self) -> None:
