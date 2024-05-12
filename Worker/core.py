@@ -1,6 +1,7 @@
 # class that groups all the little pieces and utilities and make them work togheter generating a definitive worker
 # object
 import threading
+import time
 
 from Utils.MQTT.client import MQTTClient
 from Utils.OnFiles.configfile_watchdog import ConfigFileWatchdog as Wd
@@ -17,18 +18,17 @@ class MQTTWorker:
         self.toolbox = t.MethodToolBox()  # generate toolbox of functions
         self.yaml_data = Yl(self.configfile_name).load()  # arguments for selected config YAML file
         self.mqttc = MQTTClient(self.yaml_data, self.toolbox)  # instantiate mqtt custom client (not started yet)
-        self.ev = threading.Event()
+        self.watchdog = Wd(self)  # instantiate watchdog on config file (not started yet)
+        self.watchdog_thread = threading.Thread(target=self.watchdog.watch)
 
     def spawn_worker(self):
-        watchdog = Wd(self.configfile_name)  # instantiate watchdog on config file (not started yet)
-        watchdog_thread = threading.Thread(target=watchdog.watch)
-        watchdog_thread.start()
+        self.watchdog_thread.start()
         self.mqttc.start()
 
     # reloads only necessary objects and restarts the new MQTT client. Typically called when changes are detected
     # in the config file by the watchdog
     def reload(self):
-        self.mqttc.stop()
+        self.mqttc.stop(False)
         self.yaml_data = Yl(self.configfile_name).load()
         self.mqttc = MQTTClient(self.yaml_data, self.toolbox)
         self.mqttc.start()
@@ -38,3 +38,8 @@ class MQTTWorker:
 if __name__ == "__main__":
     worker = MQTTWorker()
     worker.spawn_worker()
+    worker2 = MQTTWorker()
+    worker2.spawn_worker()
+    time.sleep(2)
+    for thread in threading.enumerate():
+        print(thread.name)

@@ -72,15 +72,17 @@ class MQTTClient(mqtt.Client):
 
     # disconnect the subscriber task, waits for the queue of messages that are being processed to be empty,
     # stops the publishing thread setting stop_event, waits for the thread to terminate
-    def stop(self) -> None:
+    def stop(self, quit_flag: bool = True) -> None:
         print("stopping all workers...")
         self.client.disconnect()
         self.client.loop_stop()
         self.msg_queue.put(None)  # requests the interruption of publish thread
         self.msg_queue.join()
         self.publish_thread.join()
-        print('all workers have stopped. Quitting...')
-        sys.exit(1)
+        print('mqtt service stopped')
+        if quit_flag:
+            print('Quitting...')
+            sys.exit(1)
 
 
 if __name__ == "__main__":
