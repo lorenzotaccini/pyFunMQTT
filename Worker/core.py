@@ -17,9 +17,10 @@ class MQTTWorker:
         self.toolbox = t.MethodToolBox()  # generate toolbox of functions
         self.yaml_data = Yl(self.configfile_name).load()  # arguments for selected config YAML file
         self.mqttc = MQTTClient(self.yaml_data, self.toolbox)  # instantiate mqtt custom client (not started yet)
+        self.ev = threading.Event()
 
     def spawn_worker(self):
-        watchdog = Wd(self)  # instantiate watchdog on config file (not started yet)
+        watchdog = Wd(self.configfile_name)  # instantiate watchdog on config file (not started yet)
         watchdog_thread = threading.Thread(target=watchdog.watch)
         watchdog_thread.start()
         self.mqttc.start()
@@ -37,5 +38,3 @@ class MQTTWorker:
 if __name__ == "__main__":
     worker = MQTTWorker()
     worker.spawn_worker()
-    while True:
-        pass

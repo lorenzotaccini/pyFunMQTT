@@ -1,31 +1,30 @@
+import os
 import time
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
 
-import Utils.cli as cli
-from Utils.MQTT.client import MQTTClient
+class ConfigFileWatchdog:
+    def __init__(self, filename):
+        self.filename = filename
+        self.last_modified_time = self.get_last_modified_time()
 
+    def get_last_modified_time(self):
+        if os.path.exists(self.filename):
+            return os.path.getmtime(self.filename)
+        else:
+            raise FileNotFoundError(f"{self.filename} does not exist.")
 
-class ConfigFileWatchdog(FileSystemEventHandler):
-    def __init__(self, worker):
-        super().__init__()
-        self.worker = worker
-        self.configfile_name = worker.configfile_name
+    def check_modification(self):
+        current_modified_time = self.get_last_modified_time()
+        if current_modified_time != self.last_modified_time:
+            print(f"File {self.filename} has been modified.")
+            self.last_modified_time = current_modified_time
 
-    def on_modified(self, event):
-        if event.src_path.endswith(self.configfile_name):
-            if input(f"at {time.localtime()} -> Detected changes in actual configuration file: '{self.configfile_name}'"
-                     f"\nReload the session applying the new configuration? [y/n]: ") == ('Y' or 'y'):
-                self.worker.reload()
+    def watch(self, interval=1):
+        while True:
+            self.check_modification()
+            time.sleep(interval)
 
-    def watch(self):
-        observer = Observer()
-        observer.schedule(self, path='.', recursive=False)
-        observer.start()
-        try:
-            while True:
-                print("a")
-                time.sleep(1)
-        except KeyboardInterrupt:
-            observer.stop()
-        observer.join()
+# Example usage:
+if __name__ == "__main__":
+    filename = "config.yml"  # Replace with the file you want to watch
+    watchdog = ConfigFileWatchdog(filename)
+    watchdog.watch()
