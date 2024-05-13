@@ -1,11 +1,12 @@
 import queue
 import sys
 import threading
+import time
 from types import SimpleNamespace
 
 import paho.mqtt.client as mqtt
 
-import Utils.OnFiles.yaml_loader as y
+from Utils.OnFiles.yaml_loader import YamlLoader as Yl
 import Utils.UserFunctions.toolbox as t
 
 QOS = 1
@@ -49,7 +50,7 @@ class MQTTClient(mqtt.Client):
     # Funzione di esempio per elaborare il messaggio
     def process_message(self, payload):
         # TODO as of now, messages are strings and not serialized data files such as json yaml exc...
-        return self.toolbox.process(self.config_params.function, payload)
+        return self.toolbox.process(self.config_params.function, payload) # TODO alcune funzioni potrebbero usare altri valori contenuti nei parametri di configurazione
 
     def publish_messages(self) -> None:
         while True:
@@ -85,10 +86,14 @@ class MQTTClient(mqtt.Client):
             print('Quitting...')
             sys.exit(1)
 
+if __name__ == '__main__':
+    import Utils.cli as cli
 
-if __name__ == "__main__":
-    client = MQTTClient(y.YamlLoader(), t.MethodToolBox())
-    # signal.signal(signal.SIGTERM, client.stop)
-    client.start()
-    if input():
-        client.stop()
+    run_args = cli.CLI()  # arguments from program call in command line
+    configfile_name = run_args.args.configfile
+    toolbox = t.MethodToolBox()  # generate toolbox of functions
+    yaml_data = Yl(configfile_name).load()  # arguments for selected config YAML file
+    mqttc = MQTTClient(yaml_data, toolbox)  # instantiate mqtt custom client (not started yet)
+    mqttc.start()
+    time.sleep(5)
+    mqttc.stop()

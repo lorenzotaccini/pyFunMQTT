@@ -1,7 +1,7 @@
 ---
  broker: localhost
  port: 1883
- inTopic: input/topic
+ inTopic: ca/topic
  function:
   - removews
   - upper

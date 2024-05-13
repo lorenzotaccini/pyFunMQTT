@@ -38,8 +38,9 @@ class MQTTWorker:
 if __name__ == "__main__":
     worker = MQTTWorker()
     worker.spawn_worker()
-    worker2 = MQTTWorker()
-    worker2.spawn_worker()
-    time.sleep(2)
+    #worker2 = MQTTWorker()
+    #worker2.spawn_worker()
     for thread in threading.enumerate():
         print(thread.name)
+    while True:
+        time.sleep(1)
