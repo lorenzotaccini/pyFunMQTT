@@ -32,6 +32,8 @@ class ConfigFileWatchdog:
     def watch(self, interval=1):
         while True:
             while not self.stop_flag:
+                if self.worker.watchdog_stop_event.is_set():
+                    return True
                 time.sleep(interval)
                 self.check_modification()
             self.worker.reload()

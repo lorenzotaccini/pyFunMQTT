@@ -9,3 +9,14 @@
  key: ciao
  inFormat: yaml
  outFormat: json
+---
+ broker: localhost
+ port: 1883
+ inTopic: ca/topic
+ function:
+   - removews
+   - upper
+ outTopic: output/topic
+ key: ciao
+ inFormat: yaml
+ outFormat: json
