@@ -5,11 +5,13 @@ from datetime import datetime
 
 # not using watchdog library as of now, it was resulting in the watchdog thread being unable to detect file changes
 class ConfigFileWatchdog:
-    def __init__(self, worker):
-        self.worker = worker
-        self.filename = self.worker.configfile_name
+    def __init__(self, spawner):
+        self.spawner = spawner
+        self.filename = self.spawner.configfile_name
         self.last_modified_time = self.get_last_modified_time()
+        self.old_data = spawner.get_config()
         self.stop_flag = False
+
 
     def get_last_modified_time(self):
         if os.path.exists(self.filename):
@@ -23,6 +25,11 @@ class ConfigFileWatchdog:
             # Get the current time
             current_time = datetime.now()
             formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+            new_data = self.spawner.get_config()
+            for o_i, n_i in zip(self.old_data, new_data):
+
+
+            self.old_data=new_data
             flag = input(f"{formatted_time}: detected changes in config file {self.filename}, reload configuration "
                          f"with new parameters? [y/n] ->  ")
             if flag == 'y' or flag == 'Y':

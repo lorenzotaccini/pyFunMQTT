@@ -15,8 +15,10 @@ class Spawner:
     def __init__(self):
         self.run_args = cli.CLI()  # arguments from program call in command line
         self.configfile_name = self.run_args.args.configfile
-        self.yaml_data = [doc for doc in Yl(self.configfile_name).load()]  # arguments for selected config YAML file
+        self.yaml_data = []  # arguments for selected config YAML file
 
+    def get_config(self):
+        self.yaml_data = [doc for doc in Yl(self.configfile_name).load()]
 
 
 class MQTTWorker:
