@@ -5,7 +5,7 @@ import time
 
 from Utils.MQTT.client import MQTTClient
 from Utils.OnFiles.configfile_watchdog import ConfigFileWatchdog as Wd
-from Utils.OnFiles.yaml_loader import YamlLoader as Yl
+from Utils.OnFiles.yaml_loader_full import YamlLoader as Yl
 import Utils.UserFunctions.toolbox as t
 
 import Utils.cli as cli

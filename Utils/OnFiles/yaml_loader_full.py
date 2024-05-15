@@ -44,7 +44,6 @@ class YamlLoader:
 
         print("\nspell checking -> ", end='')
 
-        # check input topic
         for field, pattern in required_fields.items():
             if field not in yaml_content:
                 wrong_fields.append(field)
