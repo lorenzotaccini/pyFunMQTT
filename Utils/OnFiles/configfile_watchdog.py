@@ -12,7 +12,6 @@ class ConfigFileWatchdog:
         self.old_data = spawner.get_config()
         self.stop_flag = False
 
-
     def get_last_modified_time(self):
         if os.path.exists(self.filename):
             return os.path.getmtime(self.filename)
@@ -22,26 +21,31 @@ class ConfigFileWatchdog:
     def check_modification(self):
         current_modified_time = self.get_last_modified_time()
         if current_modified_time != self.last_modified_time:
+            affected_clients = []
             # Get the current time
             current_time = datetime.now()
-            formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+            formatted_time = current_time.strftime("%H:%M:%S")
             new_data = self.spawner.get_config()
-            for o_i, n_i in zip(self.old_data, new_data):
+            print(f'-------- at time {formatted_time} --------')
+            for i, o_i, n_i in enumerate(zip(self.old_data, new_data)):
+                if not o_i == n_i:
+                    print(f'detected changes in config file {self.filename}, document {i}')
+                    affected_clients.append(i)
 
+            self.old_data = new_data
 
-            self.old_data=new_data
-            flag = input(f"{formatted_time}: detected changes in config file {self.filename}, reload configuration "
-                         f"with new parameters? [y/n] ->  ")
+            flag = input('do you want to reload the affected clients with the new configuration? [y/n] -> ')
             if flag == 'y' or flag == 'Y':
                 self.stop_flag = True
+
             self.last_modified_time = current_modified_time
 
     def watch(self, interval=1):
         while True:
             while not self.stop_flag:
-                if self.worker.watchdog_stop_event.is_set():
+                if self.spawner.watchdog_stop_event.is_set():
                     return True
                 time.sleep(interval)
                 self.check_modification()
-            self.worker.reload()
+            self.spawner.reload_single()
             self.stop_flag = False

@@ -16,17 +16,28 @@ class Spawner:
         self.run_args = cli.CLI()  # arguments from program call in command line
         self.configfile_name = self.run_args.args.configfile
         self.yaml_data = []  # arguments for selected config YAML file
+        self.watchdog = Wd(self)  # instantiate watchdog on config file (not started yet)
+        self.watchdog_thread = threading.Thread(target=self.watchdog.watch)
+        self.worker_list = []
 
     def get_config(self):
         self.yaml_data = [doc for doc in Yl(self.configfile_name).load()]
+
+    # spawn all required clients to
+    def spawn(self):
+        for c in self.yaml_data:
+            self.worker_list.append(MQTTClient(c, t.MethodToolBox()))
+        for client in self.worker_list:
+            client.start()
+
+    def reload_single(self, client_number: list):
+        for client in self.worker_list:
 
 
 class MQTTWorker:
     def __init__(self):
         self.toolbox = t.MethodToolBox()  # generate toolbox of functions
         self.mqttc = MQTTClient(self.yaml_data, self.toolbox)  # instantiate mqtt custom client (not started yet)
-        self.watchdog = Wd(self)  # instantiate watchdog on config file (not started yet)
-        self.watchdog_thread = threading.Thread(target=self.watchdog.watch)
 
     def spawn_worker(self):
         self.watchdog_thread.start()
