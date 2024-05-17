@@ -24,7 +24,7 @@ class Spawner:
         self.yaml_data = [doc for doc in Yl(self.configfile_name).load()]
 
     # spawn all required clients to
-    def spawn(self):
+    def spawn(self): #TODO se un utente inserisce un nuovo doc in yaml file, spawna un nuovo client
         for c in self.yaml_data:
             self.worker_list.append(MQTTClient(c, t.MethodToolBox()))
         for client in self.worker_list:
