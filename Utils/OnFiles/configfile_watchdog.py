@@ -11,6 +11,7 @@ class ConfigFileWatchdog:
         self.last_modified_time = self.get_last_modified_time()
         self.old_data = spawner.get_config()
         self.stop_flag = False
+        self.affected_clients = []
 
     def get_last_modified_time(self):
         if os.path.exists(self.filename):
@@ -21,7 +22,7 @@ class ConfigFileWatchdog:
     def check_modification(self):
         current_modified_time = self.get_last_modified_time()
         if current_modified_time != self.last_modified_time:
-            affected_clients = []
+            self.affected_clients = []
             # Get the current time
             current_time = datetime.now()
             formatted_time = current_time.strftime("%H:%M:%S")
@@ -30,7 +31,6 @@ class ConfigFileWatchdog:
             for i, o_i, n_i in enumerate(zip(self.old_data, new_data)):
                 if not o_i == n_i:
                     print(f'detected changes in config file {self.filename}, document {i}')
-                    affected_clients.append(i)
 
             self.old_data = new_data
 
@@ -47,5 +47,5 @@ class ConfigFileWatchdog:
                     return True
                 time.sleep(interval)
                 self.check_modification()
-            self.spawner.reload_single()
+            self.spawner.reload(self.old_data)
             self.stop_flag = False

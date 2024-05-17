@@ -50,7 +50,8 @@ class MQTTClient(mqtt.Client):
     # Funzione di esempio per elaborare il messaggio
     def process_message(self, payload):
         # TODO as of now, messages are strings and not serialized data files such as json yaml exc...
-        return self.toolbox.process(self.config_params.function, payload) # TODO alcune funzioni potrebbero usare altri valori contenuti nei parametri di configurazione
+        return self.toolbox.process(self.config_params.function,
+                                    payload)  # TODO alcune funzioni potrebbero usare altri valori contenuti nei parametri di configurazione
 
     def publish_messages(self) -> None:
         while True:
@@ -62,6 +63,9 @@ class MQTTClient(mqtt.Client):
             self.client.publish(self.config_params.outTopic, message, QOS)
             print(f"Published message on topic {self.config_params.outTopic}: {message}")
             self.msg_queue.task_done()
+
+    def get_configuration(self) -> dict:
+        return self.config_params.__dict__
 
     def start(self) -> None:
         try:
@@ -85,6 +89,7 @@ class MQTTClient(mqtt.Client):
         if quit_flag:
             print('Quitting...')
             sys.exit(1)
+
 
 if __name__ == '__main__':
     import Utils.cli as cli

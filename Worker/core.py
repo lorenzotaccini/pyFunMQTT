@@ -18,21 +18,31 @@ class Spawner:
         self.yaml_data = []  # arguments for selected config YAML file
         self.watchdog = Wd(self)  # instantiate watchdog on config file (not started yet)
         self.watchdog_thread = threading.Thread(target=self.watchdog.watch)
-        self.worker_list = []
+        self.worker_list = []  # list containing all clients actually running
 
     def get_config(self):
         self.yaml_data = [doc for doc in Yl(self.configfile_name).load()]
+        return self.yaml_data
 
-    # spawn all required clients to
-    def spawn(self): #TODO se un utente inserisce un nuovo doc in yaml file, spawna un nuovo client
-        for c in self.yaml_data:
-            self.worker_list.append(MQTTClient(c, t.MethodToolBox()))
-        for client in self.worker_list:
-            client.start()
+    # spawn as many clients as required from configuration file
+    def spawn_all(self):  # TODO se un utente inserisce un nuovo doc in yaml file, spawna un nuovo client
+        for conf in self.get_config():
+            self.worker_list.append(MQTTClient(conf, t.MethodToolBox()))
 
-    def reload_single(self, client_number: list):
-        for client in self.worker_list:
+        for mqclient in self.worker_list:
+            mqclient.start()
 
+    # spawn a single client. configuration data structure is required in the arguments
+    def spawn_single(self, conf: dict):
+        new_mqclient = MQTTClient(conf, t.MethodToolBox())
+        self.worker_list.append(new_mqclient)
+        new_mqclient.start()
+
+    def reload(self, conf: list[dict]):
+        for c in self.worker_list:
+            if c.get_configuration() not in conf:
+                c.stop(False)
+        # todo RAGIONARE SU COME SPAWNARE NUOVI CLIENT DOPO AVER CHIUSO QUELLI NON ATTUALI
 
 class MQTTWorker:
     def __init__(self):
