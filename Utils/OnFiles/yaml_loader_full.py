@@ -19,7 +19,7 @@ class YamlLoader:
                         print(f"document {i} not loaded")
         except FileNotFoundError:
             print("Config file not found, maybe incorrect path?", file=sys.stderr)
-            return False
+            sys.exit(-1)
         except y.YAMLError as exc:  # exception on YAML syntax
             if hasattr(exc, 'problem_mark'):
                 print(f"Error in YAML file {stream.name}, line {exc.problem_mark.line + 1}", file=sys.stderr)

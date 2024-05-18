@@ -44,8 +44,8 @@ class MQTTClient(mqtt.Client):
         self.client.subscribe(self.config_params.inTopic)
 
     def on_connect_fail(self, client, userdata):
-        print("First connection with the selected MQTT broker has failed, quitting.")
-        sys.exit(-2)
+        print("Connection with the selected MQTT broker has failed, quitting.")
+        self.stop()
 
     # Funzione di esempio per elaborare il messaggio
     def process_message(self, payload):

@@ -17,6 +17,7 @@ class Spawner:
         self.run_args = cli.CLI()  # arguments from program call in command line
         self.configfile_name = self.run_args.args.configfile
         self.yaml_data = self.load_current_config()  # arguments for selected config YAML file
+        self.watchdog_interval = self.run_args.args.w
         self.watchdog, self.watchdog_thread = self.__start_watchdog()
         self.worker_list = []  # list containing all clients actually running
 

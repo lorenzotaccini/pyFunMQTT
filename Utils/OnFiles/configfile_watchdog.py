@@ -1,4 +1,5 @@
 import os
+import sys
 import threading
 import time
 from datetime import datetime
@@ -14,10 +15,14 @@ class ConfigFileWatchdog:
         self.stop_flag = threading.Event()
 
     def __get_last_modified_time(self):
-        if os.path.exists(self.filename):
-            return os.path.getmtime(self.filename)
-        else:
-            raise FileNotFoundError(f"{self.filename} does not exist.")
+        try:
+            if os.path.exists(self.filename):
+                return os.path.getmtime(self.filename)
+            else:
+                raise FileNotFoundError()
+        except FileNotFoundError:
+            print(f"{self.filename} does not exist.")
+            sys.exit(-1)
 
     def __check_apply_modification(self):
         current_modified_time = self.__get_last_modified_time()
@@ -36,13 +41,13 @@ class ConfigFileWatchdog:
 
         self.last_modified_time = current_modified_time
 
-    def watch(self, interval=1):
+    def watch(self):
         print('----- watchdog is now detecting changes on file ' + self.filename + '-----')
         while True:
             if self.stop_flag.is_set():
                 print('stopping watchdog...')
                 return True
-            time.sleep(interval)
+            time.sleep(int(self.spawner.watchdog_interval))
             self.__check_apply_modification()
 
 
