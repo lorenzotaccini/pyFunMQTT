@@ -16,22 +16,22 @@ class Spawner:
     def __init__(self):
         self.run_args = cli.CLI()  # arguments from program call in command line
         self.configfile_name = self.run_args.args.configfile
-        self.yaml_data = []  # arguments for selected config YAML file
-        self.watchdog = Wd(self)  # instantiate watchdog on config file (not started yet)
-        self.watchdog_thread = threading.Thread(target=self.watchdog.watch)
-        self.watchdog_thread.start()
-        self.watchdog_stop_event = threading.Event()
+        self.yaml_data = self.load_current_config()  # arguments for selected config YAML file
+        self.watchdog, self.watchdog_thread = self.__start_watchdog()
         self.worker_list = []  # list containing all clients actually running
 
-    def get_config(self, dynamic: bool = True):
-        if dynamic:
-            self.yaml_data = [doc for doc in Yl(self.configfile_name).load()]
-        return self.yaml_data
+    def load_current_config(self) -> [dict]:
+        return [doc for doc in Yl(self.configfile_name).load()]
 
     # spawn as many clients as required from configuration file
-    def spawn_all(self):
-        for conf in self.get_config():
+    def spawn_all(self, config: [dict] = None):
+        if config is None:
+            self.yaml_data = self.load_current_config()
+        else:  # avoid loading from yaml 2 times
+            self.yaml_data = config
+        for conf in self.yaml_data:
             self.__spawn_single(conf)
+
         print(f'clients list: {self.worker_list}')
 
     # spawn a single client. configuration data structure is required in the arguments
@@ -40,20 +40,29 @@ class Spawner:
         self.worker_list.append(new_mqclient)
         new_mqclient.start()
 
-    def reload(self):
+    def reload(self, config: [dict] = None):
         for c in self.worker_list:
             c.stop()
         self.worker_list = []
-        self.spawn_all()
+        self.spawn_all(config)
 
     def shutdown(self):
         print('Shutting down...')
-        self.watchdog_stop_event.set()  # send shutdown signal to watchdog
+        self.watchdog.stop_flag.set()  # send shutdown signal to watchdog
         self.watchdog_thread.join()
         for c in self.worker_list:
             c.stop()
         print('all clients have been shutdown, now quitting...')
         sys.exit(1)
+
+    def __start_watchdog(self) -> tuple[Wd, threading.Thread]:
+        w = Wd(self)  # instantiate watchdog on config file (not started yet)
+        w_t = threading.Thread(target=w.watch)
+        w_t.start()
+        return w, w_t
+
+    def __stop_watchdog(self):
+        self.watchdog.stop_flag.set()
 
 
 if __name__ == "__main__":

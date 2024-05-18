@@ -17,4 +17,4 @@
  outTopic: output/topic
  key: ciao
  inFormat: yaml
- outFormat: json
+ outFormat: yaml

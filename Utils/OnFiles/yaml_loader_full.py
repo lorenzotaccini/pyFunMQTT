@@ -7,25 +7,25 @@ class YamlLoader:
     def __init__(self, configfile_name: str):
         self.configfile_name = configfile_name
 
-    def load(self) -> [dict | None]:
+    def load(self) -> [dict | bool]:
         try:
             with open(self.configfile_name) as stream:
+                print('Loading configuration file: ' + self.configfile_name)
                 for i, yamlres in enumerate(y.safe_load_all(stream)):
                     if YamlLoader.check_structure(yamlres):
-                        print("successfully loaded YAML config file: " + self.configfile_name + f", document {i}")
+                        print(f"successfully loaded document {i}")
                         yield yamlres
                     else:
-                        print("YAML config file not loaded")
-                        sys.exit(-1)
+                        print(f"document {i} not loaded")
         except FileNotFoundError:
             print("Config file not found, maybe incorrect path?", file=sys.stderr)
-            sys.exit(-1)
+            return False
         except y.YAMLError as exc:  # exception on YAML syntax
             if hasattr(exc, 'problem_mark'):
                 print(f"Error in YAML file {stream.name}, line {exc.problem_mark.line + 1}", file=sys.stderr)
             else:
                 print(exc)
-            sys.exit(-1)
+            return False
 
     # static method to check correct fields spelling and presence
     @staticmethod

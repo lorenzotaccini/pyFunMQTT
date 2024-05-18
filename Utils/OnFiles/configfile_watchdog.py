@@ -1,4 +1,5 @@
 import os
+import threading
 import time
 from datetime import datetime
 
@@ -9,8 +10,8 @@ class ConfigFileWatchdog:
         self.spawner = spawner
         self.filename = self.spawner.configfile_name
         self.last_modified_time = self.__get_last_modified_time()
-        self.actual_data = spawner.get_config(dynamic=False)
-        self.stop_flag = False
+        self.actual_conf = self.spawner.yaml_data
+        self.stop_flag = threading.Event()
 
     def __get_last_modified_time(self):
         if os.path.exists(self.filename):
@@ -18,28 +19,36 @@ class ConfigFileWatchdog:
         else:
             raise FileNotFoundError(f"{self.filename} does not exist.")
 
-    def __check_modification(self):
+    def __check_apply_modification(self):
         current_modified_time = self.__get_last_modified_time()
         if current_modified_time != self.last_modified_time:
-            # Get the current time
-            current_time = datetime.now()
-            formatted_time = current_time.strftime("%H:%M:%S")
-            new_data = self.spawner.get_config()
-            print(f'-------- at time {formatted_time} --------')
-            for i, (o_i, n_i) in enumerate(zip(self.actual_data, new_data)):
-                print('loop')
-                if not o_i == n_i:
-                    print(f'detected changes in config file {self.filename}, document {i}')
+            new_conf = self.spawner.load_current_config()
+            if new_conf != self.actual_conf:
+                # Get the current time
+                self.actual_conf = new_conf
+                current_time = datetime.now()
+                formatted_time = current_time.strftime("%H:%M:%S")
 
-            self.actual_data = new_data
+                flag = input('Changes detected in configuration file.\n'
+                             'Do you want to reload all clients with the new configuration? [y/n] -> ')
+                if flag == 'y' or flag == 'Y':
+                    self.spawner.reload(self.actual_conf)
 
-            flag = input('do you want to reload the clients with the new configuration? [y/n] -> ')
-            if flag == 'y' or flag == 'Y':
-                print('aaaaaa')
-                self.stop_flag = True
+        self.last_modified_time = current_modified_time
 
-            self.last_modified_time = current_modified_time
+    def watch(self, interval=1):
+        print('----- watchdog is now detecting changes on file ' + self.filename + '-----')
+        while True:
+            print('alive')
+            if self.stop_flag.is_set():
+                print('stopping watchdog...')
+                return True
+            time.sleep(interval)
+            self.__check_apply_modification()
 
+
+
+'''
     def watch(self, interval=1):
         print('----- watchdog is now watching on file ' + self.filename + '-----')
         while True:
@@ -53,3 +62,5 @@ class ConfigFileWatchdog:
             print('now reloading')
             self.spawner.reload()
             self.stop_flag = False
+'''
+
