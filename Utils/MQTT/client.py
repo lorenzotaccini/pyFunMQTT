@@ -69,6 +69,7 @@ class MQTTClient(mqtt.Client):
 
     def start(self) -> None:
         try:
+            print(f"Starting MQTT client with configuration: {self.get_configuration()}")
             self.client.connect(host=self.config_params.broker, port=self.config_params.port)
             self.publish_thread.start()
             self.client.loop_start()
@@ -78,8 +79,8 @@ class MQTTClient(mqtt.Client):
 
     # disconnect the subscriber task, waits for the queue of messages that are being processed to be empty,
     # stops the publishing thread setting stop_event, waits for the thread to terminate
-    def stop(self, quit_flag: bool = True) -> None:
-        print("stopping all workers...")
+    def stop(self, quit_flag: bool = False) -> None:
+        print("stopping all client workers...")
         self.client.disconnect()
         self.client.loop_stop()
         self.msg_queue.put(None)  # requests the interruption of publish thread

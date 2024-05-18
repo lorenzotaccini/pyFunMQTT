@@ -1,9 +1,8 @@
 ---
  broker: localhost
  port: 1883
- inTopic: ca/topic
+ inTopic: i/1
  function:
-  - removews
   - upper
  outTopic: output/topic
  key: ciao
@@ -12,10 +11,9 @@
 ---
  broker: localhost
  port: 1883
- inTopic: ca/topic
+ inTopic: i/2
  function:
    - removews
-   - upper
  outTopic: output/topic
  key: ciao
  inFormat: yaml

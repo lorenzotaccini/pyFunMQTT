@@ -21,35 +21,39 @@ def on_publish(client, userdata, mid, reason_code, properties):
         print("but remember that mid could be re-used !")
 
 
-unacked_publish = set()
-mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-mqttc.on_publish = on_publish
+if __name__=='__main__':
 
-mqttc.user_data_set(unacked_publish)
-mqttc.connect("localhost")
-mqttc.loop_start()
+    unacked_publish = set()
+    mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+    mqttc.on_publish = on_publish
 
-lorem = (
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore "
-    "magna aliqua. Sit amet porttitor eget dolor morbi non. Commodo viverra maecenas accumsan lacus vel facilisis "
-    "volutpat est. Duis at consectetur lorem donec massa sapien faucibus et. Amet dictum sit amet justo donec "
-    "enim diam vulputate ut. Euismod in pellentesque massa placerat duis ultricies. Rutrum tellus pellentesque eu "
-    "tincidunt tortor aliquam nulla facilisi cras. In hac habitasse platea dictumst quisque. Scelerisque felis "
-    "imperdiet proin fermentum leo vel orci porta non. Elementum curabitur vitae nunc sed velit dignissim. Eget "
-    "lorem dolor sed viverra ipsum nunc. Mauris in aliquam sem fringilla ut morbi tincidunt augue interdum. "
-    "Tempor orci dapibus ultrices in. Morbi tincidunt ornare massa eget egestas purus viverra. Cum sociis natoque "
-    "penatibus et magnis dis parturient montes. Donec et odio pellentesque diam volutpat commodo sed. Turpis "
-    "tincidunt id aliquet risus feugiat in ante metus dictum.")
+    mqttc.user_data_set(unacked_publish)
+    mqttc.connect("localhost")
+    mqttc.loop_start()
 
-for i in range(2000):
-    # Our application produce some messages
-    print(i)
-    msg_info = mqttc.publish("input/topic", "{}. {}".format(i, lorem), qos=1)
-    unacked_publish.add(msg_info.mid)
+    lorem = (
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore "
+        "magna aliqua. Sit amet porttitor eget dolor morbi non. Commodo viverra maecenas accumsan lacus vel facilisis "
+        "volutpat est. Duis at consectetur lorem donec massa sapien faucibus et. Amet dictum sit amet justo donec "
+        "enim diam vulputate ut. Euismod in pellentesque massa placerat duis ultricies. Rutrum tellus pellentesque eu "
+        "tincidunt tortor aliquam nulla facilisi cras. In hac habitasse platea dictumst quisque. Scelerisque felis "
+        "imperdiet proin fermentum leo vel orci porta non. Elementum curabitur vitae nunc sed velit dignissim. Eget "
+        "lorem dolor sed viverra ipsum nunc. Mauris in aliquam sem fringilla ut morbi tincidunt augue interdum. "
+        "Tempor orci dapibus ultrices in. Morbi tincidunt ornare massa eget egestas purus viverra. Cum sociis natoque "
+        "penatibus et magnis dis parturient montes. Donec et odio pellentesque diam volutpat commodo sed. Turpis "
+        "tincidunt id aliquet risus feugiat in ante metus dictum.")
 
-    # Due to race-condition described above, the following way to wait for all publish is safer
-    msg_info.wait_for_publish()
+    for i in range(2000):
+        # Our application produce some messages
+        print(i)
+        msg_info = mqttc.publish("i/2", "{}. {}".format(i, lorem), qos=1)
+        unacked_publish.add(msg_info.mid)
 
-mqttc.disconnect()
-mqttc.loop_stop()
-sys.exit(10)
+        # Due to race-condition described above, the following way to wait for all publish is safer
+        msg_info.wait_for_publish()
+
+    mqttc.disconnect()
+    mqttc.loop_stop()
+    sys.exit(10)
+
+
