@@ -39,7 +39,6 @@ class ConfigFileWatchdog:
     def watch(self, interval=1):
         print('----- watchdog is now detecting changes on file ' + self.filename + '-----')
         while True:
-            print('alive')
             if self.stop_flag.is_set():
                 print('stopping watchdog...')
                 return True

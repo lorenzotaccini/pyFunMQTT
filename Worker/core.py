@@ -24,11 +24,7 @@ class Spawner:
         return [doc for doc in Yl(self.configfile_name).load()]
 
     # spawn as many clients as required from configuration file
-    def spawn_all(self, config: [dict] = None):
-        if config is None:
-            self.yaml_data = self.load_current_config()
-        else:  # avoid loading from yaml 2 times
-            self.yaml_data = config
+    def spawn_all(self):
         for conf in self.yaml_data:
             self.__spawn_single(conf)
 
@@ -40,16 +36,16 @@ class Spawner:
         self.worker_list.append(new_mqclient)
         new_mqclient.start()
 
-    def reload(self, config: [dict] = None):
+    def reload(self, config: [dict]):
         for c in self.worker_list:
             c.stop()
         self.worker_list = []
-        self.spawn_all(config)
+        self.yaml_data = config
+        self.spawn_all()
 
     def shutdown(self):
         print('Shutting down...')
-        self.watchdog.stop_flag.set()  # send shutdown signal to watchdog
-        self.watchdog_thread.join()
+        self.__stop_watchdog()  # send shutdown signal to watchdog
         for c in self.worker_list:
             c.stop()
         print('all clients have been shutdown, now quitting...')
@@ -63,6 +59,7 @@ class Spawner:
 
     def __stop_watchdog(self):
         self.watchdog.stop_flag.set()
+        self.watchdog_thread.join()
 
 
 if __name__ == "__main__":

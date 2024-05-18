@@ -1,6 +1,16 @@
 ---
  broker: localhost
  port: 1883
+ inTopic: i/10
+ function:
+   - removews
+ outTopic: output/topic
+ key: ciao
+ inFormat: yaml
+ outFormat: xml
+---
+ broker: localhost
+ port: 1883
  inTopic: i/1
  function:
   - upper
@@ -8,13 +18,3 @@
  key: ciao
  inFormat: yaml
  outFormat: json
----
- broker: localhost
- port: 1883
- inTopic: i/2
- function:
-   - removews
- outTopic: output/topic
- key: ciao
- inFormat: yaml
- outFormat: yaml
