@@ -17,7 +17,7 @@ class RemoveWS(Service):
 
 class Merge(Service):
     def serve(self, data: Any):
-        print(data)
+        pass
 
 
 class Upper(Service):

@@ -1,6 +1,6 @@
+import logging
 import sys
 import threading
-import time
 
 from Utils.MQTT.client import MQTTClient
 from Utils.OnFiles.configfile_watchdog import ConfigFileWatchdog as Wd
@@ -12,6 +12,7 @@ import Utils.cli as cli
 
 class Spawner:
     def __init__(self):
+        logging.basicConfig(stream=sys.stdout, level=logging.INFO)
         self.run_args = cli.CLI()  # arguments from program call in command line
         self.configfile_name = self.run_args.args.configfile
         self.yaml_data = self.load_current_config()  # arguments for selected config YAML file
@@ -27,7 +28,7 @@ class Spawner:
         for conf in self.yaml_data:
             self.__spawn_single(conf)
 
-        print(f'clients list: {self.worker_list}')
+        logging.info(f'clients list: {self.worker_list}')
 
     # spawn a single client. configuration data structure is required in the arguments
     def __spawn_single(self, conf: dict):
@@ -64,8 +65,6 @@ class Spawner:
 if __name__ == "__main__":
     s = Spawner()
     s.spawn_all()
-    for thread in threading.enumerate():
-        print(thread.name)
     while True:
         if input():
             s.shutdown()
