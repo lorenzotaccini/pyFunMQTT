@@ -27,7 +27,7 @@ class YamlLoader:
                 print(exc)
             return False
 
-    # static method to check correct fields spelling and presence
+    # static method to check correct fields spelling and their presence
     @staticmethod
     def check_structure(yaml_content: dict) -> bool:
         required_fields = {'broker': r"^(((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4})$|^localhost$",
@@ -51,7 +51,7 @@ class YamlLoader:
 
             value = yaml_content[field]
 
-            if isinstance(value, list):
+            if isinstance(value, list):  # "function" field might contain a list of functions, we check all of them
                 for v in value:
                     if not re.match(pattern, v):
                         wrong_fields.append(field)

@@ -8,6 +8,8 @@ class Service(ABC):
         ...
 
 
+# USER DEFINED CLASSES
+
 class RemoveWS(Service):
     def serve(self, data: str):
         return data.replace(' ', '')

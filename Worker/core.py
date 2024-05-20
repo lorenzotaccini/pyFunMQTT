@@ -1,5 +1,3 @@
-# class that groups all the little pieces and utilities and make them work togheter generating a definitive worker
-# object
 import sys
 import threading
 import time
@@ -69,4 +67,5 @@ if __name__ == "__main__":
     for thread in threading.enumerate():
         print(thread.name)
     while True:
-        time.sleep(1)
+        if input():
+            s.shutdown()

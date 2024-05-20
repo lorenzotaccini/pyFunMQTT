@@ -5,7 +5,7 @@ import os
 class CLI:
     def __init__(self):
         self.parser = argparse.ArgumentParser(description="PyFunMQTT")
-        self.parser.add_argument("-c", "--configfile", required=True,
+        self.parser.add_argument("-c", "--configfile",
                                  default=str(
                                      os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'Tests',
                                                   'config.yml')),

@@ -8,10 +8,10 @@ from datetime import datetime
 # not using watchdog library as of now, it was resulting in the watchdog thread being unable to detect file changes
 class ConfigFileWatchdog:
     def __init__(self, spawner):
-        self.spawner = spawner
-        self.filename = self.spawner.configfile_name
+        self.__spawner = spawner
+        self.filename = self.__spawner.configfile_name
         self.last_modified_time = self.__get_last_modified_time()
-        self.actual_conf = self.spawner.yaml_data
+        self.actual_conf = self.__spawner.yaml_data
         self.stop_flag = threading.Event()
 
     def __get_last_modified_time(self):
@@ -27,7 +27,7 @@ class ConfigFileWatchdog:
     def __check_apply_modification(self):
         current_modified_time = self.__get_last_modified_time()
         if current_modified_time != self.last_modified_time:
-            new_conf = self.spawner.load_current_config()
+            new_conf = self.__spawner.load_current_config()
             if new_conf != self.actual_conf:
                 # Get the current time
                 self.actual_conf = new_conf
@@ -37,7 +37,7 @@ class ConfigFileWatchdog:
                 flag = input('Changes detected in configuration file.\n'
                              'Do you want to reload all clients with the new configuration? [y/n] -> ')
                 if flag == 'y' or flag == 'Y':
-                    self.spawner.reload(self.actual_conf)
+                    self.__spawner.reload(self.actual_conf)
 
         self.last_modified_time = current_modified_time
 
@@ -47,7 +47,7 @@ class ConfigFileWatchdog:
             if self.stop_flag.is_set():
                 print('stopping watchdog...')
                 return True
-            time.sleep(int(self.spawner.watchdog_interval))
+            self.stop_flag.wait(int(self.__spawner.watchdog_interval))
             self.__check_apply_modification()
 
 

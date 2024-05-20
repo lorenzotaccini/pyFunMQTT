@@ -1,5 +1,5 @@
 import sys
-import time
+
 import paho.mqtt.client as mqtt
 
 
@@ -43,11 +43,11 @@ if __name__=='__main__':
         "penatibus et magnis dis parturient montes. Donec et odio pellentesque diam volutpat commodo sed. Turpis "
         "tincidunt id aliquet risus feugiat in ante metus dictum.")
 
-    for i in range(2000):
+    for i in range(5000):
         # Our application produce some messages
         print(i)
-        msg_info = mqttc.publish("i/2", "{}. {}".format(i, lorem), qos=1)
-        unacked_publish.add(msg_info.mid)
+        msg_info = mqttc.publish("i/1", "{}. {}".format(i, lorem), qos=1)
+        unacked_publish.add(msg_info.mid)  # mid is MESSAGE ID
 
         # Due to race-condition described above, the following way to wait for all publish is safer
         msg_info.wait_for_publish()

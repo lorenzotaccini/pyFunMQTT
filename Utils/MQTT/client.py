@@ -6,7 +6,6 @@ from types import SimpleNamespace
 
 import paho.mqtt.client as mqtt
 
-from Utils.OnFiles.yaml_loader import YamlLoader as Yl
 import Utils.UserFunctions.toolbox as t
 
 QOS = 1
@@ -34,7 +33,6 @@ class MQTTClient(mqtt.Client):
         print(f"Received message on topic {message.topic}: {payload}")
 
         processed_message = self.process_message(payload)
-
         self.msg_queue.put(processed_message)
 
     def on_connect(self, mqttc, obj, flags, reason_code, properties):
@@ -90,16 +88,3 @@ class MQTTClient(mqtt.Client):
         if quit_flag:
             print('Quitting...')
             sys.exit(1)
-
-
-if __name__ == '__main__':
-    import Utils.cli as cli
-
-    run_args = cli.CLI()  # arguments from program call in command line
-    configfile_name = run_args.args.configfile
-    toolbox = t.MethodToolBox()  # generate toolbox of functions
-    yaml_data = Yl(configfile_name).load()  # arguments for selected config YAML file
-    mqttc = MQTTClient(yaml_data, toolbox)  # instantiate mqtt custom client (not started yet)
-    mqttc.start()
-    time.sleep(5)
-    mqttc.stop()
