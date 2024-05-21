@@ -1,6 +1,9 @@
 import sys
 import yaml as y
 import re
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class YamlLoader:
@@ -10,21 +13,21 @@ class YamlLoader:
     def load(self) -> [dict | bool]:
         try:
             with open(self.configfile_name) as stream:
-                print('Loading configuration file: ' + self.configfile_name)
+                logger.info('Loading configuration file: ' + self.configfile_name)
                 for i, yamlres in enumerate(y.safe_load_all(stream)):
                     if YamlLoader.check_structure(yamlres):
-                        print(f"successfully loaded document {i}")
+                        logging.info(f"successfully loaded document {i}")
                         yield yamlres
                     else:
-                        print(f"document {i} not loaded")
+                        logger.warning(f"document {i} not loaded")
         except FileNotFoundError:
-            print("Config file not found, maybe incorrect path?", file=sys.stderr)
+            logger.critical("Config file not found, maybe incorrect path?")
             sys.exit(-1)
         except y.YAMLError as exc:  # exception on YAML syntax
             if hasattr(exc, 'problem_mark'):
-                print(f"Error in YAML file {stream.name}, line {exc.problem_mark.line + 1}", file=sys.stderr)
+                logger.warning(f"Error in YAML file {stream.name}, line {exc.problem_mark.line + 1}")
             else:
-                print(exc)
+                logger.warning(exc)
             return False
 
     # static method to check correct fields spelling and their presence
@@ -42,7 +45,7 @@ class YamlLoader:
         # catches and enlightens missing keys from YAML file
         wrong_fields = []
 
-        print("\nspell checking -> ", end='')
+        logger.debug("spell checking... ")
 
         for field, pattern in required_fields.items():
             if field not in yaml_content:
@@ -62,10 +65,10 @@ class YamlLoader:
             if wrong_fields:
                 raise ValueError()
             else:
-                print("configuration file is valid", end='')
+                logger.debug("configuration file is valid")
             # all checked, return True
-            print(" -> end of spell checking")
+            logger.debug(" -> end of spell checking")
             return True
         except ValueError:
-            print(f"the following fields are wrong or missing: {wrong_fields}")
+            logger.warning(f"the following fields are wrong or missing: {wrong_fields}")
             return False

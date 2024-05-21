@@ -14,8 +14,10 @@ class CLI:
                                  help="connection port on which the broker is operating")
         self.parser.add_argument("-b", "--broker", default="localhost",
                                  help="broker's IP address (default: localhost)")
-        self.parser.add_argument("-v", "--verbose", default=False, help='verbose mode, allows to see all traffic '
-                                                                        'being processed by the clients')
+        self.parser.add_argument("-v", "--verbose", default=False, action='store_true', help='verbose mode, allows to '
+                                                                                             'see all traffic'
+                                                                                             'being processed by the '
+                                                                                             'clients')
         self.parser.add_argument("-w", default=10, help="wait time in seconds between watchdog scans on given "
                                                         "configuration file")
         self.args = self.parser.parse_args()

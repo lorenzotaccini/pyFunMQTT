@@ -15,6 +15,6 @@
  function:
   - upper
  outTopic: output/topic
- key: ciao
+ key: ciaone
  inFormat: yaml
  outFormat: json

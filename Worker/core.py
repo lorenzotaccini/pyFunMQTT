@@ -1,19 +1,20 @@
 import logging
 import sys
 import threading
+import logging
 
 from Utils.MQTT.client import MQTTClient
 from Utils.OnFiles.configfile_watchdog import ConfigFileWatchdog as Wd
 from Utils.OnFiles.yaml_loader_full import YamlLoader as Yl
 import Utils.UserFunctions.toolbox as t
 
-import Utils.cli as cli
+
+logger = logging.getLogger(__name__)
 
 
 class Spawner:
-    def __init__(self):
-        logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-        self.run_args = cli.CLI()  # arguments from program call in command line
+    def __init__(self, run_args):
+        self.run_args = run_args  # arguments from program call in command line
         self.configfile_name = self.run_args.args.configfile
         self.yaml_data = self.load_current_config()  # arguments for selected config YAML file
         self.watchdog_interval = self.run_args.args.w
@@ -28,7 +29,7 @@ class Spawner:
         for conf in self.yaml_data:
             self.__spawn_single(conf)
 
-        logging.info(f'clients list: {self.worker_list}')
+        logger.debug(f'clients list: {self.worker_list}')
 
     # spawn a single client. configuration data structure is required in the arguments
     def __spawn_single(self, conf: dict):
@@ -44,11 +45,11 @@ class Spawner:
         self.spawn_all()
 
     def shutdown(self):
-        print('Shutting down...')
+        logger.info('Shutting down...')
         self.__stop_watchdog()  # send shutdown signal to watchdog
         for c in self.worker_list:
             c.stop()
-        print('all clients have been shutdown, now quitting...')
+        logger.info('all clients have been shutdown, now quitting...')
         sys.exit(1)
 
     def __start_watchdog(self) -> tuple[Wd, threading.Thread]:
@@ -60,11 +61,3 @@ class Spawner:
     def __stop_watchdog(self):
         self.watchdog.stop_flag.set()
         self.watchdog_thread.join()
-
-
-if __name__ == "__main__":
-    s = Spawner()
-    s.spawn_all()
-    while True:
-        if input():
-            s.shutdown()

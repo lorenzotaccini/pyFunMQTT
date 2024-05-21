@@ -1,0 +1,5 @@
+2024-05-21 11:01:20 - root - DEBUG - Questo è un messaggio di debug
+2024-05-21 11:01:20 - root - INFO - Questo è un messaggio informativo
+2024-05-21 11:01:20 - root - WARNING - Questo è un messaggio di avviso
+2024-05-21 11:01:20 - root - ERROR - Questo è un messaggio di errore
+2024-05-21 11:01:20 - root - CRITICAL - Questo è un messaggio critico
