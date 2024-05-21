@@ -1,7 +1,274 @@
-21-05-2024 12:17:54 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x0000014FEFAE4230>, <Utils.MQTT.client.MQTTClient object at 0x0000014FEFAE6B40>]
-21-05-2024 12:19:47 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x000002991CCA5820>, <Utils.MQTT.client.MQTTClient object at 0x000002991CCA6B70>]
-21-05-2024 12:19:51 - Worker.core - INFO: Shutting down...
-21-05-2024 12:19:51 - Worker.core - INFO: all clients have been shutdown, now quitting...
-21-05-2024 12:20:10 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x0000023C92A95BE0>, <Utils.MQTT.client.MQTTClient object at 0x0000023C92A96E40>]
-21-05-2024 12:20:15 - Worker.core - INFO: Shutting down...
-21-05-2024 12:20:15 - Worker.core - INFO: all clients have been shutdown, now quitting...
+21-05-2024 18:05:46 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:05:46 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:05:46 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:05:46 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:05:46 - root - INFO: successfully loaded document 0
+21-05-2024 18:05:46 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:05:46 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:05:46 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:05:46 - root - INFO: successfully loaded document 1
+21-05-2024 18:05:46 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/10', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 18:05:46 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['upper'], 'outTopic': 'output/topic', 'key': 'ciaone', 'inFormat': 'yaml', 'outFormat': 'json'}
+21-05-2024 18:05:46 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:05:46 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x00000256A19E8F80>, <Utils.MQTT.client.MQTTClient object at 0x00000256A19EA360>]
+21-05-2024 18:05:46 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:06:06 - Worker.core - INFO: Shutting down...
+21-05-2024 18:06:06 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:06:06 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:06:06 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:06:06 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:06:06 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:06:06 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:06:06 - Worker.core - INFO: all clients have been shutdown, now quitting...
+21-05-2024 18:06:16 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:06:16 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:06:16 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:06:16 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:06:16 - root - INFO: successfully loaded document 0
+21-05-2024 18:06:16 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:06:16 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:06:16 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:06:16 - root - INFO: successfully loaded document 1
+21-05-2024 18:06:16 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/10', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 18:06:16 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['upper'], 'outTopic': 'output/topic', 'key': 'ciaone', 'inFormat': 'yaml', 'outFormat': 'json'}
+21-05-2024 18:06:16 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:06:16 - Worker.core - WARNING: clients list: [<Utils.MQTT.client.MQTTClient object at 0x0000023C342D2CF0>, <Utils.MQTT.client.MQTTClient object at 0x0000023C34BAA1B0>]
+21-05-2024 18:06:16 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:06:35 - Worker.core - INFO: Shutting down...
+21-05-2024 18:06:35 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:06:35 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:06:35 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:06:35 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:06:35 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:06:35 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:06:35 - Worker.core - INFO: all clients have been shutdown, now quitting...
+21-05-2024 18:06:37 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:06:37 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:06:37 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:06:37 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:06:37 - root - INFO: successfully loaded document 0
+21-05-2024 18:06:37 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:06:37 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:06:37 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:06:37 - root - INFO: successfully loaded document 1
+21-05-2024 18:06:37 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/10', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 18:06:37 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['upper'], 'outTopic': 'output/topic', 'key': 'ciaone', 'inFormat': 'yaml', 'outFormat': 'json'}
+21-05-2024 18:06:37 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:06:37 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x000001ADD66F50A0>, <Utils.MQTT.client.MQTTClient object at 0x000001ADD66F6480>]
+21-05-2024 18:06:37 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:07:07 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:07:07 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:07:07 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:07:07 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:07:07 - root - INFO: successfully loaded document 0
+21-05-2024 18:07:07 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:07:07 - Utils.OnFiles.yaml_loader_full - WARNING: the following fields are wrong or missing: ['inFormat']
+21-05-2024 18:07:07 - Utils.OnFiles.yaml_loader_full - WARNING: document 1 not loaded
+21-05-2024 18:07:46 - Worker.core - INFO: Shutting down...
+21-05-2024 18:11:54 - Utils.OnFiles.configfile_watchdog - WARNING: Changes detected in configuration file. RELOADING SESSION
+21-05-2024 18:12:20 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:12:20 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:12:20 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:12:20 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:12:20 - root - INFO: successfully loaded document 0
+21-05-2024 18:12:20 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:12:20 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:12:20 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:12:20 - root - INFO: successfully loaded document 1
+21-05-2024 18:12:20 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/10', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 18:12:20 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['upper'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'json'}
+21-05-2024 18:12:20 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:12:20 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x000001FB540E2120>, <Utils.MQTT.client.MQTTClient object at 0x000001FB540E3440>]
+21-05-2024 18:12:20 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:12:38 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:12:38 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:12:38 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:12:38 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:12:38 - root - INFO: successfully loaded document 0
+21-05-2024 18:12:38 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:12:38 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:12:38 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:12:38 - root - INFO: successfully loaded document 1
+21-05-2024 18:12:38 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/10', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 18:12:38 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['upper'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'json'}
+21-05-2024 18:12:38 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:12:38 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x000002D657C62120>, <Utils.MQTT.client.MQTTClient object at 0x000002D657C63440>]
+21-05-2024 18:12:38 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:12:53 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:12:53 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:12:53 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:12:53 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:12:53 - root - INFO: successfully loaded document 0
+21-05-2024 18:12:53 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:12:53 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:12:53 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:12:53 - root - INFO: successfully loaded document 1
+21-05-2024 18:12:53 - Utils.OnFiles.configfile_watchdog - WARNING: Changes detected in configuration file. RELOADING SESSION
+21-05-2024 18:12:53 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:12:53 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:12:53 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:12:53 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:12:53 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:12:53 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:12:53 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/10', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 18:12:53 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['upper'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'xml', 'outFormat': 'json'}
+21-05-2024 18:12:53 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:12:53 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x000002D657C63950>, <Utils.MQTT.client.MQTTClient object at 0x000002D657C98B30>]
+21-05-2024 18:12:53 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:13:27 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:13:27 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:13:27 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:13:27 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:13:27 - root - INFO: successfully loaded document 0
+21-05-2024 18:13:27 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:13:27 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:13:27 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:13:27 - root - INFO: successfully loaded document 1
+21-05-2024 18:13:27 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/10', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 18:13:27 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['upper'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'xml', 'outFormat': 'json'}
+21-05-2024 18:13:27 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:13:27 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x00000205F59C52B0>, <Utils.MQTT.client.MQTTClient object at 0x00000205F5DCFCB0>]
+21-05-2024 18:13:27 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:13:36 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:13:36 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:13:36 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:13:36 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:13:36 - root - INFO: successfully loaded document 0
+21-05-2024 18:13:36 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:13:36 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:13:36 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:13:36 - root - INFO: successfully loaded document 1
+21-05-2024 18:13:36 - Utils.OnFiles.configfile_watchdog - WARNING: Changes detected in configuration file. RELOADING SESSION
+21-05-2024 18:13:41 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:13:41 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:13:41 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:13:41 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:13:41 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:13:41 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:13:41 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/10', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 18:13:41 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['upper'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'xml', 'outFormat': 'xml'}
+21-05-2024 18:13:41 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:13:41 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x00000205F4E1FB00>, <Utils.MQTT.client.MQTTClient object at 0x00000205F5DF5730>]
+21-05-2024 18:13:41 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:14:14 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:14:14 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:14:14 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:14:14 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:14:14 - root - INFO: successfully loaded document 0
+21-05-2024 18:14:14 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:14:14 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:14:14 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:14:14 - root - INFO: successfully loaded document 1
+21-05-2024 18:14:14 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/10', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 18:14:14 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['upper'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'xml', 'outFormat': 'xml'}
+21-05-2024 18:14:14 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:14:14 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x0000023CD6E0FEF0>, <Utils.MQTT.client.MQTTClient object at 0x0000023CD6E39D00>]
+21-05-2024 18:14:14 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:14:20 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:14:20 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:14:20 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:14:20 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:14:20 - root - INFO: successfully loaded document 0
+21-05-2024 18:14:20 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:14:20 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:14:20 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:14:20 - root - INFO: successfully loaded document 1
+21-05-2024 18:14:20 - Utils.OnFiles.configfile_watchdog - WARNING: Changes detected in configuration file. RELOADING SESSION
+21-05-2024 18:14:23 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:14:23 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:14:23 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:14:23 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:14:23 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:14:23 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:14:23 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/10', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 18:14:24 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['upper'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'xml', 'outFormat': 'json'}
+21-05-2024 18:14:24 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:14:24 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x0000023CD5ECFB00>, <Utils.MQTT.client.MQTTClient object at 0x0000023CD6E3B4D0>]
+21-05-2024 18:14:24 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:14:29 - asyncio - DEBUG: Using proactor: IocpProactor
+21-05-2024 18:15:01 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:15:01 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:15:01 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:15:01 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:15:01 - root - INFO: successfully loaded document 0
+21-05-2024 18:15:01 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:15:01 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:15:01 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:15:01 - root - INFO: successfully loaded document 1
+21-05-2024 18:15:01 - Utils.OnFiles.configfile_watchdog - WARNING: Changes detected in configuration file. RELOADING SESSION
+21-05-2024 18:15:05 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:15:05 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:15:05 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:15:05 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:15:05 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:15:05 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:15:05 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/10', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 18:15:05 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/2', 'function': ['upper'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'xml', 'outFormat': 'json'}
+21-05-2024 18:15:05 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:15:05 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x0000023CD6C42C90>, <Utils.MQTT.client.MQTTClient object at 0x0000023CD6E608C0>]
+21-05-2024 18:15:05 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:15:23 - Utils.MQTT.client - INFO: Received message on topic i/2: ciao
+21-05-2024 18:15:23 - Utils.MQTT.client - INFO: Published message on topic output/topic: CIAO
+21-05-2024 18:15:54 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:15:54 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:15:54 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:15:54 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:15:54 - root - INFO: successfully loaded document 0
+21-05-2024 18:15:54 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:15:54 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:15:54 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:15:54 - root - INFO: successfully loaded document 1
+21-05-2024 18:15:54 - Utils.OnFiles.configfile_watchdog - WARNING: Changes detected in configuration file. RELOADING SESSION
+21-05-2024 18:16:31 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:16:31 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:16:31 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:16:32 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:16:32 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:16:32 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:16:33 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 18:16:33 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/2', 'function': ['upper'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'xml', 'outFormat': 'json'}
+21-05-2024 18:16:33 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:16:33 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x0000023CD3C30FE0>, <Utils.MQTT.client.MQTTClient object at 0x0000023CD6E61E20>]
+21-05-2024 18:16:33 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:16:39 - Utils.MQTT.client - INFO: Received message on topic i/1: ciao
+21-05-2024 18:16:39 - Utils.MQTT.client - INFO: Published message on topic output/topic: ciao
+21-05-2024 18:16:40 - Utils.MQTT.client - INFO: Received message on topic i/1: ciao
+21-05-2024 18:16:40 - Utils.MQTT.client - INFO: Published message on topic output/topic: ciao
+21-05-2024 18:16:41 - Utils.MQTT.client - INFO: Received message on topic i/1: ciao
+21-05-2024 18:16:41 - Utils.MQTT.client - INFO: Published message on topic output/topic: ciao
+21-05-2024 18:16:43 - Utils.MQTT.client - INFO: Received message on topic i/2: ciao
+21-05-2024 18:16:43 - Utils.MQTT.client - INFO: Published message on topic output/topic: CIAO
+21-05-2024 18:16:51 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:16:51 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:16:51 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:16:51 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:16:51 - root - INFO: successfully loaded document 0
+21-05-2024 18:16:51 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:16:51 - Utils.OnFiles.yaml_loader_full - WARNING: the following fields are wrong or missing: ['outFormat']
+21-05-2024 18:16:51 - Utils.OnFiles.yaml_loader_full - WARNING: document 1 not loaded
+21-05-2024 18:16:51 - Utils.OnFiles.configfile_watchdog - WARNING: Changes detected in configuration file. RELOADING SESSION
+21-05-2024 18:16:55 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:16:55 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:16:55 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:16:55 - Utils.MQTT.client - INFO: stopping all client workers...
+21-05-2024 18:16:55 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+21-05-2024 18:16:55 - Utils.MQTT.client - INFO: mqtt service stopped
+21-05-2024 18:16:55 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 18:16:55 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x0000023CD6C41F40>]
+21-05-2024 18:16:55 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:17:05 - Utils.MQTT.client - INFO: Received message on topic i/1: ciao
+21-05-2024 18:17:05 - Utils.MQTT.client - INFO: Published message on topic output/topic: ciao
+21-05-2024 18:32:16 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 18:32:16 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:32:16 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:32:16 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:32:16 - root - INFO: successfully loaded document 0
+21-05-2024 18:32:16 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 18:32:16 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 18:32:16 - Utils.OnFiles.yaml_loader_full - DEBUG:  -> end of spell checking
+21-05-2024 18:32:16 - root - INFO: successfully loaded document 1
+21-05-2024 18:32:16 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 18:32:16 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/2', 'function': ['upper'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'xml', 'outFormat': 'json'}
+21-05-2024 18:32:16 - Utils.MQTT.client - INFO: Connected with result code Success
+21-05-2024 18:32:16 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x000002356CEFBE60>, <Utils.MQTT.client.MQTTClient object at 0x000002356CF3DB80>]
+21-05-2024 18:32:16 - Utils.MQTT.client - INFO: Connected with result code Success

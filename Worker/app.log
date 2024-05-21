@@ -1,3 +1,0 @@
-21-05-2024 11:35:34 - __main__ aaaa DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x000002023D11EDB0>, <Utils.MQTT.client.MQTTClient object at 0x000002023D15C080>]
-21-05-2024 11:43:22 - __main__ aaaa DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x0000028EC3862B10>, <Utils.MQTT.client.MQTTClient object at 0x0000028EC3863EF0>]
-21-05-2024 11:58:27 - root - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x000001B51D6C1AC0>, <Utils.MQTT.client.MQTTClient object at 0x000001B51D6C3800>]

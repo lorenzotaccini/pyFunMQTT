@@ -16,7 +16,7 @@ class YamlLoader:
                 logger.info('Loading configuration file: ' + self.configfile_name)
                 for i, yamlres in enumerate(y.safe_load_all(stream)):
                     if YamlLoader.check_structure(yamlres):
-                        logging.info(f"successfully loaded document {i}")
+                        logger.info(f"successfully loaded document {i}")
                         yield yamlres
                     else:
                         logger.warning(f"document {i} not loaded")
@@ -67,7 +67,7 @@ class YamlLoader:
             else:
                 logger.debug("configuration file is valid")
             # all checked, return True
-            logger.debug(" -> end of spell checking")
+            logger.debug("... end of spell checking")
             return True
         except ValueError:
             logger.warning(f"the following fields are wrong or missing: {wrong_fields}")

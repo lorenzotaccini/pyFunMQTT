@@ -15,24 +15,34 @@ def setup_logger(verbose):
         datefmt='%d-%m-%Y %H:%M:%S'
     )
 
-    # Crea un handler per lo stdout
-    console_handler = logging.StreamHandler(stream=sys.stdout)
-    if verbose:
-        console_handler.setLevel(logging.DEBUG)
-    else:
-        console_handler.setLevel(logging.WARNING)
-    console_handler.setFormatter(formatter)
+    # all messages below WARNING level are logged on stdout
+    stdout_handler = logging.StreamHandler(sys.stdout)
+    stdout_handler.addFilter(lambda record: record.levelno < logging.WARNING)
+
+    # all messages beyond INFO level are logged on stderr
+    stderr_handler = logging.StreamHandler(sys.stderr)
+    stderr_handler.setLevel(logging.WARNING)
 
     # Crea un handler per il file di log con rotazione
     file_handler = RotatingFileHandler(
         'app.log', maxBytes=5 * 1024 * 1024, backupCount=3
     )
-    file_handler.setLevel(logging.DEBUG)
+
+    if verbose:
+        stdout_handler.setLevel(logging.DEBUG)
+        file_handler.setLevel(logging.DEBUG)
+    else:
+        stdout_handler.setLevel(logging.WARNING)
+        file_handler.setLevel(logging.WARNING)
+
     file_handler.setFormatter(formatter)
+    stdout_handler.setFormatter(formatter)
+    stderr_handler.setFormatter(formatter)
 
     # Aggiungi gli handler al logger
-    logger.addHandler(console_handler)
+    logger.addHandler(stdout_handler)
     logger.addHandler(file_handler)
+    logger.addHandler(stderr_handler)
 
 
 if __name__ == '__main__':
@@ -42,5 +52,5 @@ if __name__ == '__main__':
     client_spawner = core.Spawner(run_args)
     client_spawner.spawn_all()
     while True:
-        if input() == 'q':
+        if input().lower() == 'q':
             client_spawner.shutdown()
