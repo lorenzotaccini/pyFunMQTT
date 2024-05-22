@@ -31,13 +31,12 @@ class MQTTClient(mqtt.Client):
 
         self.publish_thread = threading.Thread(target=self.publish_messages)
 
-    # Funzione per gestire i messaggi in arrivo
+    # Incoming messages are put in a queue to be processed and re-set from publish_message function
     def on_message(self, mqttc, obj, message):
         payload = message.payload.decode("utf-8")
         print(f"Received message on topic {message.topic}: {payload}")
 
-        processed_message = self.process_message(payload)
-        self.__msg_queue.put(processed_message)
+        self.__msg_queue.put(payload)
 
     def on_connect(self, mqttc, obj, flags, reason_code, properties):
         logger.info(f"Connected with result code {reason_code}")
@@ -63,15 +62,19 @@ class MQTTClient(mqtt.Client):
                 logger.info("quitting has been requested on publishing thread")
                 return
 
+            message = self.process_message(message)
+
             # if data to publish is a dict (for example, splitting original data and publishing on different topics),
             # key represents the topic on which the message will be published, value is the payload
+            # OTHER DATA IS NOT ALLOWED TO BE DICT, IT HAS TO BE IN SOME SORT OF DATA FORMAT LIKE JSON, CSV....
             if isinstance(message, dict):
                 for key, value in message.items():
                     self.client.publish(key, value, QOS)
             else:
-                self.client.publish(self.__config_params['outTopic'], message, QOS)
+                for o_t in self.__config_params['outTopic']:
+                    self.client.publish(o_t, message, QOS)
 
-            print(f"Published message on topic {self.__config_params['outTopic']}: {message}")
+            print(f"Published message on topic/s {self.__config_params['outTopic']}: {message}")
             self.__msg_queue.task_done()
 
     def get_configuration(self) -> dict:

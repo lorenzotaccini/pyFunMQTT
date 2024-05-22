@@ -40,7 +40,7 @@ class YamlLoader:
                            'outTopic': r"^([a-zA-Z0-9_\-#]+/?)*[a-zA-Z0-9_\-#]+$",
                            'retain': r"^active$|^disabled$",
                            'function': r"^([a-zA-Z0-9_\-])+$",
-                           'key': r"^([a-zA-Z0-9_\-])+$",
+                           'parameters': r"^([a-zA-Z0-9_\-])+$",
                            'outFormat': r'\b(json|xml|yaml|csv)\b',
                            'inFormat': r'\b(json|xml|yaml|csv)\b'}
 
