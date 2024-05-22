@@ -4,7 +4,12 @@
  inTopic: i/1
  function:
    - removews
- outTopic: output/topic
+ outTopic:
+   - o/1
+   - o/2
+   - o/3
+
+ retain: active
  key: ciao
  inFormat: yaml
  outFormat: xml
@@ -15,6 +20,7 @@
  function:
   - upper
  outTopic: output/topic
+ retain: disabled
  key: ciao
  inFormat: xml
  outFormat: json

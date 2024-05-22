@@ -14,7 +14,7 @@ class CLI:
                                                   'config.yml')),
                                  help="load config file in YAML format (default: config.yml in Tests folder)")
         silent_verbose_group.add_argument("-v", "--verbose",
-                                          default=False,
+                                          default=True,
                                           action='store_true',
                                           help='verbose mode, allows to see all the traffic ')
         silent_verbose_group.add_argument('-s',

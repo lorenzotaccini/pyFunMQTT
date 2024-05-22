@@ -15,6 +15,7 @@ class YamlLoader:
             with open(self.configfile_name) as stream:
                 logger.info('Loading configuration file: ' + self.configfile_name)
                 for i, yamlres in enumerate(y.safe_load_all(stream)):
+                    # print(yamlres)
                     if YamlLoader.check_structure(yamlres):
                         logger.info(f"successfully loaded document {i}")
                         yield yamlres
@@ -37,6 +38,7 @@ class YamlLoader:
                            'port': r"^(?:[1-9]\d{0,3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$",
                            'inTopic': r"^([a-zA-Z0-9_\-#]+/?)*[a-zA-Z0-9_\-#]+$",
                            'outTopic': r"^([a-zA-Z0-9_\-#]+/?)*[a-zA-Z0-9_\-#]+$",
+                           'retain': r"^active$|^disabled$",
                            'function': r"^([a-zA-Z0-9_\-])+$",
                            'key': r"^([a-zA-Z0-9_\-])+$",
                            'outFormat': r'\b(json|xml|yaml|csv)\b',
@@ -54,7 +56,8 @@ class YamlLoader:
 
             value = yaml_content[field]
 
-            if isinstance(value, list):  # "function" field might contain a list of functions, we check all of them
+            # "function" and "outTopic" fields might contain a list of functions, we check all of them
+            if isinstance(value, list):
                 for v in value:
                     if not re.match(pattern, v):
                         wrong_fields.append(field)

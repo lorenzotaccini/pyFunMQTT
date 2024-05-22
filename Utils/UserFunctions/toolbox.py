@@ -7,10 +7,10 @@ class MethodToolBox:
     def __init__(self):
         self.services = {str.lower(cls.__name__): cls() for cls in Service.__subclasses__()}
 
-    def process(self, func_name: [str], data: Any) -> Any:
-        for f in func_name:
+    def process(self, conf: dict, data: Any) -> Any:
+        for f in conf['function']:
             if f in self.services.keys():
-                data = self.services[f].serve(data)
+                data = self.services[f].serve(conf, data)
         return data
 
 

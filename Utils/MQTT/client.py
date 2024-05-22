@@ -2,7 +2,8 @@ import queue
 import sys
 import threading
 import logging
-from types import SimpleNamespace
+import secrets
+import string
 
 import paho.mqtt.client as mqtt
 
@@ -18,10 +19,11 @@ class MQTTClient(mqtt.Client):
 
     def __init__(self, yl: dict, toolbox: t.MethodToolBox):
         super().__init__(CALLBACK_VERSION)
-        self.config_params = SimpleNamespace(**yl)  # Simplenamespace to improve usability within the class
-        self.msg_queue = queue.Queue()
-        self.toolbox = toolbox
+        self.__config_params = yl
+        self.__msg_queue = queue.Queue()
+        self.__stop_key = self.generate_stop_key()
 
+        self.toolbox = toolbox
         self.client = mqtt.Client(CALLBACK_VERSION)
         self.client.on_message = self.on_message
         self.client.on_connect = self.on_connect
@@ -32,16 +34,16 @@ class MQTTClient(mqtt.Client):
     # Funzione per gestire i messaggi in arrivo
     def on_message(self, mqttc, obj, message):
         payload = message.payload.decode("utf-8")
-        logger.info(f"Received message on topic {message.topic}: {payload}")
+        print(f"Received message on topic {message.topic}: {payload}")
 
         processed_message = self.process_message(payload)
-        self.msg_queue.put(processed_message)
+        self.__msg_queue.put(processed_message)
 
     def on_connect(self, mqttc, obj, flags, reason_code, properties):
         logger.info(f"Connected with result code {reason_code}")
         # Subscribing in on_connect() means that if we lose the connection and
         # reconnect then subscriptions will be renewed.
-        self.client.subscribe(self.config_params.inTopic)
+        self.client.subscribe(self.__config_params['inTopic'])
 
     def on_connect_fail(self, client, userdata):
         logger.critical("Connection with the selected MQTT broker has failed, quitting.")
@@ -50,27 +52,40 @@ class MQTTClient(mqtt.Client):
     # Funzione di esempio per elaborare il messaggio
     def process_message(self, payload):
         # TODO as of now, messages are strings and not serialized data files such as json yaml exc...
-        return self.toolbox.process(self.config_params.function,
-                                    payload)  # TODO alcune funzioni potrebbero usare altri valori contenuti nei parametri di configurazione
+        return self.toolbox.process(self.__config_params,
+                                    payload)
 
     def publish_messages(self) -> None:
         while True:
-            message = self.msg_queue.get()
-            if message is None:  # TODO sostituire None con valore più appropriato
-                self.msg_queue.task_done()
+            message = self.__msg_queue.get()
+            if message is self.__stop_key:
+                self.__msg_queue.task_done()
                 logger.info("quitting has been requested on publishing thread")
                 return
-            self.client.publish(self.config_params.outTopic, message, QOS)
-            logger.info(f"Published message on topic {self.config_params.outTopic}: {message}")
-            self.msg_queue.task_done()
+
+            # if data to publish is a dict (for example, splitting original data and publishing on different topics),
+            # key represents the topic on which the message will be published, value is the payload
+            if isinstance(message, dict):
+                for key, value in message.items():
+                    self.client.publish(key, value, QOS)
+            else:
+                self.client.publish(self.__config_params['outTopic'], message, QOS)
+
+            print(f"Published message on topic {self.__config_params['outTopic']}: {message}")
+            self.__msg_queue.task_done()
 
     def get_configuration(self) -> dict:
-        return self.config_params.__dict__
+        return self.__config_params
+
+    @staticmethod
+    def generate_stop_key() -> str:
+        charset = string.ascii_letters + string.digits
+        return ''.join(secrets.choice(charset) for _ in range(32))
 
     def start(self) -> None:
         try:
             logger.info(f"Starting MQTT client with configuration: {self.get_configuration()}")
-            self.client.connect(host=self.config_params.broker, port=self.config_params.port)
+            self.client.connect(host=self.__config_params['broker'], port=self.__config_params['port'])
             self.publish_thread.start()
             self.client.loop_start()
         except ConnectionRefusedError as cre:
@@ -83,8 +98,8 @@ class MQTTClient(mqtt.Client):
         logger.info("stopping all client workers...")
         self.client.disconnect()
         self.client.loop_stop()
-        self.msg_queue.put(None)  # requests the interruption of publish thread
-        self.msg_queue.join()
+        self.__msg_queue.put(self.__stop_key)  # requests the interruption of publish thread
+        self.__msg_queue.join()
         self.publish_thread.join()
         logger.info('mqtt service stopped')
         if quit_flag:
