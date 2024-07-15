@@ -14,13 +14,16 @@ class RemoveWS(Service):
     def serve(self, conf, data: str):
         return data.replace(' ', '')
 
-# input: list of dict, output: dict(outtopic: payload)
-class Split(Service):
-    def serve(self, conf: dict, data: Any) -> dict:
-        res = {}
-        for t in conf['outTopic']:
-            pass
 
+# input: list of dict, output: dict{outtopic: payload}
+class SplitCols(Service):
+    def serve(self, conf: dict, data: list) -> dict:
+        res = {}
+        for elem in data:  # for every row (a row is a dict)
+            for k, v in elem.items():  # for every column
+                if k in conf['key']:
+                    res[k].append(v)
+        print(res)
 
 class Upper(Service):
     def serve(self, conf, data: str):

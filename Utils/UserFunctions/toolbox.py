@@ -15,7 +15,7 @@ class MethodToolBox:
 
     def process(self, conf: dict, data: Any) -> Any:
         # normalize input
-        data = self.normalize_input(conf, data)
+        data = self.normalize_input(conf['inFormat'], data)
 
         # process normalized input using function chain
         for f in conf['function']:
@@ -24,11 +24,15 @@ class MethodToolBox:
 
         # convert in requested format and return
 
-        return self.convert_output(conf, data)
+        if isinstance(data, dict):
+            for k, v in data.values():
+                data[k] = self.convert_output(conf['outFormat'], v)
+            return data  # will return a dict where every value is converted
+
+        return self.convert_output(conf['outFormat'], data)
 
     @staticmethod
-    def normalize_input(conf: dict, data: Any) -> [dict]:
-        input_format = conf['inFormat']
+    def normalize_input(input_format: str, data: Any) -> [dict]:
         if input_format == 'csv':
             # Assume che input_data sia una stringa CSV
             reader = csv.DictReader(data.splitlines())
@@ -47,14 +51,13 @@ class MethodToolBox:
             raise ValueError("input format is not supported")
 
     @staticmethod
-    def convert_output(conf: dict, data: Any) -> Any:
-        output_format = conf['outFormat']
+    def convert_output(output_format: str, data: Any) -> Any:
         if output_format == 'yaml':
             return yaml.dump(data)
         elif output_format == 'xml':
-            root = et.Element("data")
+            root = et.Element(tag="data")
             for item in data:
-                entry = et.SubElement(root, "entry")
+                entry = et.SubElement(root, tag="entry")
                 for key, value in item.items():
                     sub_element = et.SubElement(entry, key)
                     sub_element.text = str(value)
@@ -134,7 +137,7 @@ if __name__ == '__main__':
       age: 22
       city: Napoli
     """
-    print(m.normalize_input({'inFormat': 'csv'}, csv_data))
-    print(m.normalize_input({'inFormat': 'xml'}, xml_data))
-    print(m.normalize_input({'inFormat': 'yaml'}, yaml_data))
-    print(m.normalize_input({'inFormat': 'json'}, json.dumps(json_data)))
+    print(m.normalize_input('csv', csv_data))
+    print(m.normalize_input('xml', xml_data))
+    print(m.normalize_input('yaml', yaml_data))
+    print(m.normalize_input('json', json.dumps(json_data)))

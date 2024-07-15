@@ -64,15 +64,18 @@ class MQTTClient(mqtt.Client):
 
             message = self.process_message(message)
 
-            # if data to publish is a dict (for example, splitting original data and publishing on different topics),
-            # key represents the topic on which the message will be published, value is the payload
-            # OTHER DATA IS NOT ALLOWED TO BE DICT, IT HAS TO BE IN SOME SORT OF DATA FORMAT LIKE JSON, CSV....
+            '''
+            If processed data to publish is a dict (for example, splitting original data and publishing on different topics),
+            key represents the topic on which the message will be published, value is the payload.
+            This will also ignore the list of output topics given in config file.
+            OTHER DATA IS NOT ALLOWED TO BE DICT, IT HAS TO BE IN SOME SORT OF DATA FORMAT LIKE JSON, CSV....
+            '''
             if isinstance(message, dict):
                 for key, value in message.items():
-                    self.client.publish(key, value, QOS)
+                    self.client.publish(key, value, qos=QOS, retain=self.__config_params['retain'])
             else:
-                for o_t in self.__config_params['outTopic']:
-                    self.client.publish(o_t, message, QOS)
+                for out_topic in self.__config_params['outTopic']:
+                    self.client.publish(out_topic, message, qos=QOS, retain=self.__config_params['retain'])
 
             print(f"Published message on topic/s {self.__config_params['outTopic']}: {message}")
             self.__msg_queue.task_done()
