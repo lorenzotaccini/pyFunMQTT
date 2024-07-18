@@ -1,0 +1,15 @@
+16-07-2024 10:53:14 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+16-07-2024 10:53:14 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+16-07-2024 10:53:14 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+16-07-2024 10:53:14 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+16-07-2024 10:53:14 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
+16-07-2024 10:53:14 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+16-07-2024 10:53:14 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+16-07-2024 10:53:14 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+16-07-2024 10:53:14 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
+16-07-2024 10:53:14 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+16-07-2024 10:53:14 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['splitcols'], 'outTopic': ['o/1', 'o/2', 'o/3'], 'retain': 'active', 'parameters': 'name', 'inFormat': 'yaml', 'outFormat': 'xml'}
+16-07-2024 10:53:14 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/2', 'function': ['upper'], 'outTopic': 'output/topic', 'retain': 'disabled', 'parameters': 'ciao', 'inFormat': 'xml', 'outFormat': 'json'}
+16-07-2024 10:53:14 - Utils.MQTT.client - INFO: Connected with result code Success
+16-07-2024 10:53:14 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x000002A8EFE98C20>, <Utils.MQTT.client.MQTTClient object at 0x000002A8EFE9ABA0>]
+16-07-2024 10:53:14 - Utils.MQTT.client - INFO: Connected with result code Success

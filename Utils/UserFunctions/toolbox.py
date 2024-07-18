@@ -1,5 +1,6 @@
 import csv
 import json
+from io import StringIO
 from typing import Any
 import xml.etree.ElementTree as et
 
@@ -23,9 +24,8 @@ class MethodToolBox:
                 data = self.services[f].serve(conf, data)
 
         # convert in requested format and return
-
         if isinstance(data, dict):
-            for k, v in data.values():
+            for k, v in data.items():
                 data[k] = self.convert_output(conf['outFormat'], v)
             return data  # will return a dict where every value is converted
 
@@ -72,6 +72,27 @@ class MethodToolBox:
             return json.dumps(data, indent=4)
         else:
             raise ValueError("Invalid output format. Supported formats: 'yaml', 'xml', 'csv', 'json'")
+
+
+def convert_list(format, lst):
+    if format.lower() == 'json':
+        return json.dumps(lst, indent=2)
+    elif format.lower() == 'yaml':
+        return yaml.dump(lst, default_flow_style=False)
+    elif format.lower() == 'csv':
+        output = StringIO()
+        writer = csv.writer(output)
+        writer.writerow(lst)
+        return output.getvalue().strip()
+    elif format.lower() == 'xml':
+        root = et.Element("root")
+        for item in lst:
+            child = et.Element("item")
+            child.text = item
+            root.append(child)
+        return et.tostring(root, encoding='unicode')
+    else:
+        raise ValueError("Formato non supportato: " + format)
 
 
 if __name__ == '__main__':
@@ -141,3 +162,17 @@ if __name__ == '__main__':
     print(m.normalize_input('xml', xml_data))
     print(m.normalize_input('yaml', yaml_data))
     print(m.normalize_input('json', json.dumps(json_data)))
+
+    lst = ["elemento1", "elemento2", "elemento3"]
+
+    print("JSON:")
+    print(convert_list("json", lst))
+
+    print("\nYAML:")
+    print(convert_list("yaml", lst))
+
+    print("\nCSV:")
+    print(convert_list("csv", lst))
+
+    print("\nXML:")
+    print(convert_list("xml", lst))

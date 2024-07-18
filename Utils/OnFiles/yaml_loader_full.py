@@ -38,7 +38,7 @@ class YamlLoader:
                            'port': r"^(?:[1-9]\d{0,3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$",
                            'inTopic': r"^([a-zA-Z0-9_\-#]+/?)*[a-zA-Z0-9_\-#]+$",
                            'outTopic': r"^([a-zA-Z0-9_\-#]+/?)*[a-zA-Z0-9_\-#]+$",
-                           'retain': r"^active$|^disabled$",
+                           'retain': re.compile(r"^true$|^false$", re.IGNORECASE),
                            'function': r"^([a-zA-Z0-9_\-])+$",
                            'parameters': r"^([a-zA-Z0-9_\-])+$",
                            'outFormat': r'\b(json|xml|yaml|csv)\b',

@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "Mario Rossi",
+        "email": "mario.rossi@example.com",
+        "age": 34,
+        "city": "Milano"
+    },
+    {
+        "id": 2,
+        "name": "Giulia Bianchi",
+        "email": "giulia.bianchi@example.com",
+        "age": 28,
+        "city": "Roma"
+    },
+    {
+        "id": 3,
+        "name": "Luca Verdi",
+        "email": "luca.verdi@example.com",
+        "age": 42,
+        "city": "Torino"
+    }
+]

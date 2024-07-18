@@ -1,0 +1,18 @@
+18-07-2024 11:32:34 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+18-07-2024 11:32:34 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+18-07-2024 11:32:34 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+18-07-2024 11:32:34 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+18-07-2024 11:32:34 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
+18-07-2024 11:32:34 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+18-07-2024 11:32:34 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+18-07-2024 11:32:34 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+18-07-2024 11:32:34 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
+18-07-2024 11:32:34 - Utils.OnFiles.configfile_watchdog - WARNING: Changes detected in configuration file. RELOADING SESSION
+18-07-2024 11:32:34 - Utils.MQTT.client - INFO: stopping all client workers...
+18-07-2024 11:32:34 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
+18-07-2024 11:32:34 - Utils.MQTT.client - INFO: mqtt service stopped
+18-07-2024 11:32:34 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['splitcols'], 'outTopic': ['o/1', 'o/2', 'o/3'], 'retain': True, 'parameters': ['name', 'city', 'age'], 'inFormat': 'json', 'outFormat': 'json'}
+18-07-2024 11:32:34 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/2', 'function': ['upper'], 'outTopic': 'output/topic', 'retain': True, 'parameters': 'ciao', 'inFormat': 'xml', 'outFormat': 'json'}
+18-07-2024 11:32:34 - Utils.MQTT.client - INFO: Connected with result code Success
+18-07-2024 11:32:34 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x000001EFCA3077D0>, <Utils.MQTT.client.MQTTClient object at 0x000001EFCA97B200>]
+18-07-2024 11:32:34 - Utils.MQTT.client - INFO: Connected with result code Success

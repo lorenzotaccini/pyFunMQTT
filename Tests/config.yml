@@ -3,16 +3,19 @@
  port: 1883
  inTopic: i/1
  function:
-   - removews
+   - splitcols
  outTopic:
    - o/1
    - o/2
    - o/3
 
- retain: active
- key: ciao
- inFormat: yaml
- outFormat: xml
+ retain: True
+ parameters:
+   - name
+   - city
+   - age
+ inFormat: json
+ outFormat: json
 ---
  broker: localhost
  port: 1883
@@ -20,7 +23,7 @@
  function:
   - upper
  outTopic: output/topic
- retain: disabled
- key: ciao
+ retain: True
+ parameters: ciao
  inFormat: xml
  outFormat: json

@@ -1,0 +1,12 @@
+21-05-2024 20:11:06 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+21-05-2024 20:11:06 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 20:11:06 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+21-05-2024 20:11:06 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+21-05-2024 20:11:06 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
+21-05-2024 20:11:06 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+21-05-2024 20:11:06 - Utils.OnFiles.yaml_loader_full - WARNING: the following fields are wrong or missing: ['outFormat']
+21-05-2024 20:11:06 - Utils.OnFiles.yaml_loader_full - WARNING: document 1 not loaded
+21-05-2024 20:11:06 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+21-05-2024 20:11:06 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['removews'], 'outTopic': 'output/topic', 'key': 'ciao', 'inFormat': 'yaml', 'outFormat': 'xml'}
+21-05-2024 20:11:06 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x0000016972308B60>]
+21-05-2024 20:11:06 - Utils.MQTT.client - INFO: Connected with result code Success
