@@ -23,10 +23,10 @@ class MethodToolBox:
             if f in self.services.keys():
                 data = self.services[f].serve(conf, data)
 
-        # convert in requested format and return
+        # convert in requested input_format and return
         if isinstance(data, dict):
             for k, v in data.items():
-                data[k] = self.convert_output(conf['outFormat'], v)
+                data[k] = self.convert_list(conf['outFormat'], v, k)
             return data  # will return a dict where every value is converted
 
         return self.convert_output(conf['outFormat'], data)
@@ -48,7 +48,7 @@ class MethodToolBox:
             # Assume che input_data sia una stringa YAML
             return yaml.safe_load(data)
         else:
-            raise ValueError("input format is not supported")
+            raise ValueError("input input_format is not supported")
 
     @staticmethod
     def convert_output(output_format: str, data: Any) -> Any:
@@ -71,28 +71,28 @@ class MethodToolBox:
         elif output_format == 'json':
             return json.dumps(data, indent=4)
         else:
-            raise ValueError("Invalid output format. Supported formats: 'yaml', 'xml', 'csv', 'json'")
+            raise ValueError("Invalid output input_format. Supported formats: 'yaml', 'xml', 'csv', 'json'")
 
-
-def convert_list(format, lst):
-    if format.lower() == 'json':
-        return json.dumps(lst, indent=2)
-    elif format.lower() == 'yaml':
-        return yaml.dump(lst, default_flow_style=False)
-    elif format.lower() == 'csv':
-        output = StringIO()
-        writer = csv.writer(output)
-        writer.writerow(lst)
-        return output.getvalue().strip()
-    elif format.lower() == 'xml':
-        root = et.Element("root")
-        for item in lst:
-            child = et.Element("item")
-            child.text = item
-            root.append(child)
-        return et.tostring(root, encoding='unicode')
-    else:
-        raise ValueError("Formato non supportato: " + format)
+    @staticmethod
+    def convert_list(output_format, lst, item_name):
+        if output_format.lower() == 'json':
+            return json.dumps(lst, indent=2)
+        elif output_format.lower() == 'yaml':
+            return yaml.dump(lst, default_flow_style=False)
+        elif output_format.lower() == 'csv':
+            output = StringIO()
+            writer = csv.writer(output)
+            writer.writerow(lst)
+            return output.getvalue().strip()
+        elif output_format.lower() == 'xml':
+            root = et.Element("root")
+            for item in lst:
+                child = et.Element(str(item_name))
+                child.text = str(item)
+                root.append(child)
+            return et.tostring(root, encoding='unicode')
+        else:
+            raise ValueError("Format not supported: " + output_format)
 
 
 if __name__ == '__main__':
@@ -162,17 +162,3 @@ if __name__ == '__main__':
     print(m.normalize_input('xml', xml_data))
     print(m.normalize_input('yaml', yaml_data))
     print(m.normalize_input('json', json.dumps(json_data)))
-
-    lst = ["elemento1", "elemento2", "elemento3"]
-
-    print("JSON:")
-    print(convert_list("json", lst))
-
-    print("\nYAML:")
-    print(convert_list("yaml", lst))
-
-    print("\nCSV:")
-    print(convert_list("csv", lst))
-
-    print("\nXML:")
-    print(convert_list("xml", lst))

@@ -34,7 +34,7 @@ class MQTTClient(mqtt.Client):
     # Incoming messages are put in a queue to be processed and re-set from publish_message function
     def on_message(self, mqttc, obj, message):
         payload = message.payload.decode("utf-8")
-        print(f"Received message on topic {message.topic}: {payload}")
+        logger.info(f"Received message on topic {message.topic}: {payload}")
 
         self.__msg_queue.put(payload)
 
@@ -77,7 +77,7 @@ class MQTTClient(mqtt.Client):
                 for out_topic in self.__config_params['outTopic']:
                     self.client.publish(out_topic, message, qos=QOS, retain=self.__config_params['retain'])
 
-            print(f"Published message on topic/s {self.__config_params['outTopic']}: {message}")
+            logger.info(f"Published message on topic/s {self.__config_params['outTopic']}: {message}")
             self.__msg_queue.task_done()
 
     def get_configuration(self) -> dict:

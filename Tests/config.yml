@@ -9,13 +9,13 @@
    - o/2
    - o/3
 
- retain: True
+ retain: False
  parameters:
    - name
    - city
    - age
  inFormat: json
- outFormat: json
+ outFormat: xml
 ---
  broker: localhost
  port: 1883
