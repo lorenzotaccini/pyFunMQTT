@@ -10,6 +10,7 @@ import paho.mqtt.client as mqtt
 import Utils.UserFunctions.toolbox as t
 
 QOS = 1
+OUTPUT_TOPIC_PREFIX = 'out/'
 CALLBACK_VERSION = mqtt.CallbackAPIVersion.VERSION2
 
 logger = logging.getLogger(__name__)
@@ -72,10 +73,10 @@ class MQTTClient(mqtt.Client):
             '''
             if isinstance(message, dict):
                 for key, value in message.items():
-                    self.client.publish(key, value, qos=QOS, retain=self.__config_params['retain'])
+                    self.client.publish(OUTPUT_TOPIC_PREFIX+key, value, qos=QOS, retain=self.__config_params['retain'])
             else:
                 for out_topic in self.__config_params['outTopic']:
-                    self.client.publish(out_topic, message, qos=QOS, retain=self.__config_params['retain'])
+                    self.client.publish(OUTPUT_TOPIC_PREFIX+out_topic, message, qos=QOS, retain=self.__config_params['retain'])
 
             logger.info(f"Published message on topic/s {self.__config_params['outTopic']}: {message}")
             self.__msg_queue.task_done()

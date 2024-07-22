@@ -3,7 +3,7 @@
  port: 1883
  inTopic: i/1
  function:
-   - splitcols
+   - extractcols
  outTopic:
    - o/1
    - o/2
@@ -21,9 +21,9 @@
  port: 1883
  inTopic: i/2
  function:
-  - upper
+  - splittable
  outTopic: output/topic
  retain: True
  parameters: ciao
- inFormat: xml
+ inFormat: json
  outFormat: json

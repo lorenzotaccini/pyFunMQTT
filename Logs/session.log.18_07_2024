@@ -1,19 +1,19 @@
-18-07-2024 15:58:10 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
-18-07-2024 15:58:10 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
-18-07-2024 15:58:10 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
-18-07-2024 15:58:10 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
-18-07-2024 15:58:10 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
-18-07-2024 15:58:10 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
-18-07-2024 15:58:10 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
-18-07-2024 15:58:10 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
-18-07-2024 15:58:10 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
-18-07-2024 15:58:10 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
-18-07-2024 15:58:10 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['splitcols'], 'outTopic': ['o/1', 'o/2', 'o/3'], 'retain': False, 'parameters': ['name', 'city', 'age'], 'inFormat': 'json', 'outFormat': 'xml'}
-18-07-2024 15:58:10 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/2', 'function': ['upper'], 'outTopic': 'output/topic', 'retain': True, 'parameters': 'ciao', 'inFormat': 'xml', 'outFormat': 'json'}
-18-07-2024 15:58:10 - Utils.MQTT.client - INFO: Connected with result code Success
-18-07-2024 15:58:10 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x00000197A06ECE30>, <Utils.MQTT.client.MQTTClient object at 0x00000197A06EEE70>]
-18-07-2024 15:58:10 - Utils.MQTT.client - INFO: Connected with result code Success
-18-07-2024 15:58:33 - Utils.MQTT.client - INFO: Received message on topic i/1: [
+18-07-2024 16:50:03 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+18-07-2024 16:50:03 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+18-07-2024 16:50:03 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+18-07-2024 16:50:03 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+18-07-2024 16:50:03 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
+18-07-2024 16:50:03 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+18-07-2024 16:50:03 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+18-07-2024 16:50:03 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+18-07-2024 16:50:03 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
+18-07-2024 16:50:03 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+18-07-2024 16:50:03 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['extractcols'], 'outTopic': ['o/1', 'o/2', 'o/3'], 'retain': False, 'parameters': ['name', 'city', 'age'], 'inFormat': 'json', 'outFormat': 'xml'}
+18-07-2024 16:50:03 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/2', 'function': ['splittable'], 'outTopic': 'output/topic', 'retain': True, 'parameters': 'ciao', 'inFormat': 'xml', 'outFormat': 'json'}
+18-07-2024 16:50:03 - Utils.MQTT.client - INFO: Connected with result code Success
+18-07-2024 16:50:03 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x0000026A31019B50>, <Utils.MQTT.client.MQTTClient object at 0x0000026A3101AB70>]
+18-07-2024 16:50:03 - Utils.MQTT.client - INFO: Connected with result code Success
+18-07-2024 16:50:19 - Utils.MQTT.client - INFO: Received message on topic i/2: [
     {
         "id": 1,
         "name": "Mario Rossi",
