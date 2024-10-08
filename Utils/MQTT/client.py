@@ -49,7 +49,7 @@ class MQTTClient(mqtt.Client):
         logger.critical("Connection with the selected MQTT broker has failed, quitting.")
         self.stop()
 
-    # Funzione di esempio per elaborare il messaggio
+
     def process_message(self, payload):
         # TODO as of now, messages are strings and not serialized data files such as json yaml exc...
         return self.toolbox.process(self.__config_params,

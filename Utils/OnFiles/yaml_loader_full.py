@@ -41,8 +41,7 @@ class YamlLoader:
                            'retain': re.compile(r"^true$|^false$", re.IGNORECASE),
                            'function': r"^([a-zA-Z0-9_\-])+$",
                            'parameters': r"^([a-zA-Z0-9_\-])+$",
-                           'outFormat': r'\b(json|xml|yaml|csv)\b',
-                           'inFormat': r'\b(json|xml|yaml|csv)\b'}
+                           'format': r'\b(json|xml|yaml|csv)\b'}
 
         # catches and enlightens missing keys from YAML file
         wrong_fields = []

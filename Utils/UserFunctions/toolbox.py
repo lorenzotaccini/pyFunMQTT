@@ -16,20 +16,20 @@ class MethodToolBox:
 
     def process(self, conf: dict, data: Any) -> Any:
         # normalize input
-        data = self.normalize_input(conf['inFormat'], data)
+        data = self.normalize_input(conf['format'], data)
 
         # process normalized input using function chain
         for f in conf['function']:
             if f in self.services.keys():
                 data = self.services[f].serve(conf, data)
 
-        # convert in requested input_format and return
+        # convert in requested output_format and return
         if isinstance(data, dict):
             for k, v in data.items():
-                data[k] = self.convert_list(conf['outFormat'], v, k)
+                data[k] = self.convert_list(conf['format'], v, k)
             return data  # will return a dict where every value is converted
 
-        return self.convert_output(conf['outFormat'], data)
+        return self.convert_output(conf['format'], data)
 
     @staticmethod
     def normalize_input(input_format: str, data: Any) -> [dict]:

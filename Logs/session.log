@@ -1,53 +1,24 @@
-18-07-2024 16:51:43 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
-18-07-2024 16:51:43 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
-18-07-2024 16:51:43 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
-18-07-2024 16:51:43 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
-18-07-2024 16:51:43 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
-18-07-2024 16:51:43 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
-18-07-2024 16:51:43 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
-18-07-2024 16:51:43 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
-18-07-2024 16:51:43 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
-18-07-2024 16:51:43 - Utils.OnFiles.configfile_watchdog - WARNING: Changes detected in configuration file. RELOADING SESSION
-18-07-2024 16:51:43 - Utils.MQTT.client - INFO: stopping all client workers...
-18-07-2024 16:51:43 - Utils.MQTT.client - INFO: quitting has been requested on publishing thread
-18-07-2024 16:51:43 - Utils.MQTT.client - INFO: mqtt service stopped
-18-07-2024 16:51:43 - Utils.MQTT.client - INFO: stopping all client workers...
-18-07-2024 16:51:53 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
-18-07-2024 16:51:53 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
-18-07-2024 16:51:53 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
-18-07-2024 16:51:53 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
-18-07-2024 16:51:53 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
-18-07-2024 16:51:53 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
-18-07-2024 16:51:53 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
-18-07-2024 16:51:53 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
-18-07-2024 16:51:53 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
-18-07-2024 16:51:53 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
-18-07-2024 16:51:53 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['extractcols'], 'outTopic': ['o/1', 'o/2', 'o/3'], 'retain': False, 'parameters': ['name', 'city', 'age'], 'inFormat': 'json', 'outFormat': 'xml'}
-18-07-2024 16:51:53 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/2', 'function': ['splittable'], 'outTopic': 'output/topic', 'retain': True, 'parameters': 'ciao', 'inFormat': 'json', 'outFormat': 'json'}
-18-07-2024 16:51:53 - Utils.MQTT.client - INFO: Connected with result code Success
-18-07-2024 16:51:53 - Worker.core - DEBUG: clients list: [<Utils.MQTT.client.MQTTClient object at 0x000001A924549AF0>, <Utils.MQTT.client.MQTTClient object at 0x000001A92454ABA0>]
-18-07-2024 16:51:53 - Utils.MQTT.client - INFO: Connected with result code Success
-18-07-2024 16:52:10 - Utils.MQTT.client - INFO: Received message on topic i/2: [
-    {
-        "id": 1,
-        "name": "Mario Rossi",
-        "email": "mario.rossi@example.com",
-        "age": 34,
-        "city": "Milano"
-    },
-    {
-        "id": 2,
-        "name": "Giulia Bianchi",
-        "email": "giulia.bianchi@example.com",
-        "age": 28,
-        "city": "Roma"
-    },
-    {
-        "id": 3,
-        "name": "Luca Verdi",
-        "email": "luca.verdi@example.com",
-        "age": 42,
-        "city": "Torino"
-    }
-]
-18-07-2024 16:52:10 - Utils.MQTT.client - INFO: Published message on topic/s output/topic: null
+12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
+12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
+12-09-2024 10:42:20 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+12-09-2024 10:42:20 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['extractcols'], 'outTopic': ['o/1', 'o/2', 'o/3'], 'retain': False, 'parameters': ['name', 'city', 'age'], 'inFormat': 'json', 'outFormat': 'xml'}
+12-09-2024 10:42:24 - Utils.MQTT.client - CRITICAL: [WinError 10061] Impossibile stabilire la connessione. Rifiuto persistente del computer di destinazione
+12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
+12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
+12-09-2024 10:42:50 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+12-09-2024 10:42:50 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['extractcols'], 'outTopic': ['o/1', 'o/2', 'o/3'], 'retain': False, 'parameters': ['name', 'city', 'age'], 'inFormat': 'json', 'outFormat': 'xml'}
+12-09-2024 10:42:54 - Utils.MQTT.client - CRITICAL: [WinError 10061] Impossibile stabilire la connessione. Rifiuto persistente del computer di destinazione
