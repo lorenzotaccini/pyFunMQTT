@@ -8,7 +8,6 @@
    - o/1
    - o/2
    - o/3
-
  retain: False
  parameters:
    - name
