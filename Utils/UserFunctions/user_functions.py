@@ -1,27 +1,30 @@
+import base64
 from abc import ABC, abstractmethod
 from typing import Any
+import io
+from PIL import Image
 
 
 class Service(ABC):
     @abstractmethod
-    def serve(self, conf: dict, data: Any) -> Any:
+    def serve(self, params: list, data: Any) -> Any:
         ...
 
 
 # USER DEFINED CLASSES
 
 class RemoveWS(Service):
-    def serve(self, conf, data: str):
+    def serve(self, params, data: str):
         return data.replace(' ', '')
 
 
 # input: list of dict, output: dict{outtopic: payload}
 class ExtractCols(Service):
-    def serve(self, conf: dict, data: list) -> dict:
+    def serve(self, params: dict, data: list) -> dict:
         res = {}
         for elem in data:  # for every row (a row is a dict)
             for k, v in elem.items():  # for every column
-                if k in conf['parameters']:
+                if k in params['parameters']:
                     if k not in res.keys():
                         res[k] = []
                     res[k].append(v)
@@ -29,7 +32,7 @@ class ExtractCols(Service):
 
 
 class SplitTable(Service):
-    def serve(self, conf: dict, data: list) -> Any:
+    def serve(self, params: dict, data: list) -> Any:
         # Estrai tutte le chiavi (colonne) dalla prima riga
         keys = list(table[0].keys())
 
@@ -62,13 +65,63 @@ class SplitTable(Service):
         return sub_tables
 
 
+class ImageSplit(Service):
+
+    def serve(self, params, data: Image):
+        n = params[0]
+
+        # Decodifica la stringa in bytes
+        data_bytes = bytearray(data)
+
+        # Ora puoi aprire l'immagine
+        img = Image.open(io.BytesIO(data_bytes))
+
+        print(type(data))
+
+        print("image opened")
+
+        # Dimensioni dell'immagine
+        width, height = img.size
+
+        # Calcola le dimensioni dei tiles: la divisione esatta più l'eventuale resto
+        tile_width_base = width // n
+        tile_height_base = height // n
+
+        # Lista per memorizzare i tiles come oggetti bytes
+        tiles = []
+
+        # Dividi l'immagine in n^2 tiles
+        for i in range(n):
+            for j in range(n):
+                # Calcola le dimensioni dei bordi per ciascun tile
+                left = j * tile_width_base
+                upper = i * tile_height_base
+                # Se è l'ultima colonna, includi il resto della larghezza
+                right = (j + 1) * tile_width_base if j < n - 1 else width
+                # Se è l'ultima riga, includi il resto dell'altezza
+                lower = (i + 1) * tile_height_base if i < n - 1 else height
+
+                # Crea il tile corrente
+                tile = img.crop((left, upper, right, lower))
+
+                # Converti il tile in un oggetto bytes
+                tile_bytes_io = io.BytesIO()
+                tile.save(tile_bytes_io, format='PNG')
+                tile_bytes = tile_bytes_io.getvalue()
+
+                # Aggiungi il tile alla lista
+                tiles.append(tile_bytes)
+
+        # Restituisce i tiles come lista di oggetti bytes
+        return tiles
+
 class Upper(Service):
-    def serve(self, conf, data: str):
+    def serve(self, params, data: str):
         return str(data).upper()
 
 
 class Extract(Service):
-    def serve(self, conf, data: Any):
+    def serve(self, params, data: Any):
         pass
 
 
@@ -121,9 +174,9 @@ def split_table_by_columns(table, n):
 if __name__ == '__main__':
     # Esempio di utilizzo
     table = [
-        {'id': 1, 'name': 'Alice', 'age': 30, 'city': 'New York', 'cc':'ciao'},
-        {'id': 2, 'name': 'Bob', 'age': 25, 'city': 'Los Angeles','cc':'come'},
-        {'id': 3, 'name': 'Charlie', 'age': 35, 'city': 'Chicago','cc':'va'},
+        {'id': 1, 'name': 'Alice', 'age': 30, 'city': 'New York', 'cc': 'ciao'},
+        {'id': 2, 'name': 'Bob', 'age': 25, 'city': 'Los Angeles', 'cc': 'come'},
+        {'id': 3, 'name': 'Charlie', 'age': 35, 'city': 'Chicago', 'cc': 'va'},
     ]
 
     n = 3

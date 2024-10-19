@@ -10,7 +10,6 @@ import paho.mqtt.client as mqtt
 import Utils.UserFunctions.toolbox as t
 
 QOS = 1
-OUTPUT_TOPIC_PREFIX = 'out/'
 CALLBACK_VERSION = mqtt.CallbackAPIVersion.VERSION2
 
 logger = logging.getLogger(__name__)
@@ -35,7 +34,7 @@ class MQTTClient(mqtt.Client):
     # Incoming messages are put in a queue to be processed and re-set from publish_message function
     def on_message(self, mqttc, obj, message):
         payload = message.payload.decode("utf-8")
-        logger.info(f"Received message on topic {message.topic}: {payload}")
+        #logger.info(f"Received message on topic {message.topic}: {payload}")
 
         self.__msg_queue.put(payload)
 
@@ -48,7 +47,6 @@ class MQTTClient(mqtt.Client):
     def on_connect_fail(self, client, userdata):
         logger.critical("Connection with the selected MQTT broker has failed, quitting.")
         self.stop()
-
 
     def process_message(self, payload):
         # TODO as of now, messages are strings and not serialized data files such as json yaml exc...
@@ -71,14 +69,9 @@ class MQTTClient(mqtt.Client):
             This will also ignore the list of output topics given in config file.
             OTHER DATA IS NOT ALLOWED TO BE DICT, IT HAS TO BE IN SOME SORT OF DATA FORMAT LIKE JSON, CSV....
             '''
-            if isinstance(message, dict):
-                for key, value in message.items():
-                    self.client.publish(OUTPUT_TOPIC_PREFIX+key, value, qos=QOS, retain=self.__config_params['retain'])
-                logger.info(f"Published message on topic/s {message.keys()}: {message}")
-            else:
-                for out_topic in self.__config_params['outTopic']:
-                    self.client.publish(OUTPUT_TOPIC_PREFIX+out_topic, message, qos=QOS, retain=self.__config_params['retain'])
-                logger.info(f"Published message on topic/s {self.__config_params['outTopic']}: {message}")
+            for i, m in enumerate(message):
+                for o in self.__config_params['outTopic']:
+                    self.client.publish(o + '/' + str(i), m, qos=QOS, retain=self.__config_params['retain'])
 
             self.__msg_queue.task_done()
 

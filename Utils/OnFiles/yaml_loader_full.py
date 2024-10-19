@@ -35,8 +35,6 @@ class YamlLoader:
     @staticmethod
     def check_structure(yaml_content: dict) -> bool:
         required_fields = {
-            'broker': r"^(((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4})$|^localhost$",
-            'port': r"^(?:[1-9]\d{0,3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$",
             'inTopic': r"^([a-zA-Z0-9_\-#]+/?)*[a-zA-Z0-9_\-#]+$",
             'outTopic': r"^([a-zA-Z0-9_\-#]+/?)*[a-zA-Z0-9_\-#]+$",
             'retain': re.compile(r"^true$|^false$", re.IGNORECASE),
@@ -54,26 +52,30 @@ class YamlLoader:
 
             value = yaml_content[field]
 
-            # Check if the field is a list
-            if isinstance(value, list):
-                if field == "functions":
-                    # Each function may have parameters (a map), check them
-                    for func in value:
-                        if isinstance(func, dict):
-                            for func_name, params in func.items():
-                                if not re.match(pattern, func_name):
-                                    wrong_fields.append(field)
-                                if isinstance(params, list):
-                                    for param in params:
-                                        if not re.match(r"^([a-zA-Z0-9_\-])+$", str(param)):
-                                            wrong_fields.append(f"{field}:param")
-                        else:
-                            wrong_fields.append(field)
+            # Check if the field is a list or a dictionary
+            if field == "functions":
+                if isinstance(value, list):
+                    # Iterate over each function and its parameters
+                    for f in value:
+                        for func_name, params in f.items():
+                            print(func_name)
+                            print(params)
+                            if not re.match(pattern, func_name):
+                                wrong_fields.append(field)
+                            if isinstance(params, list):
+                                for param in params:
+                                    if not re.match(r"^([a-zA-Z0-9_\-])+$", str(param)):
+                                        wrong_fields.append(f"{field}:param")
+                            elif params is not None:
+                                wrong_fields.append(f"{field}:param")
                 else:
-                    # Handle outTopic or other lists (e.g., strings in outTopic)
-                    for v in value:
-                        if not re.match(pattern, v):
-                            wrong_fields.append(field)
+                    wrong_fields.append(field)
+
+            elif isinstance(value, list):
+                # Handle outTopic or other lists (e.g., strings in outTopic)
+                for v in value:
+                    if not re.match(pattern, v):
+                        wrong_fields.append(field)
 
             # Otherwise, it's a scalar field, just match it
             else:
