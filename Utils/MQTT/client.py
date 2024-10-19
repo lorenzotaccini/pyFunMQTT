@@ -74,11 +74,12 @@ class MQTTClient(mqtt.Client):
             if isinstance(message, dict):
                 for key, value in message.items():
                     self.client.publish(OUTPUT_TOPIC_PREFIX+key, value, qos=QOS, retain=self.__config_params['retain'])
+                logger.info(f"Published message on topic/s {message.keys()}: {message}")
             else:
                 for out_topic in self.__config_params['outTopic']:
                     self.client.publish(OUTPUT_TOPIC_PREFIX+out_topic, message, qos=QOS, retain=self.__config_params['retain'])
+                logger.info(f"Published message on topic/s {self.__config_params['outTopic']}: {message}")
 
-            logger.info(f"Published message on topic/s {self.__config_params['outTopic']}: {message}")
             self.__msg_queue.task_done()
 
     def get_configuration(self) -> dict:
