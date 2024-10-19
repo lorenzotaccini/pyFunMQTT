@@ -1,24 +1,48 @@
-12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
-12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
-12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
-12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
-12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
-12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
-12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
-12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
-12-09-2024 10:42:20 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
-12-09-2024 10:42:20 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
-12-09-2024 10:42:20 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['extractcols'], 'outTopic': ['o/1', 'o/2', 'o/3'], 'retain': False, 'parameters': ['name', 'city', 'age'], 'inFormat': 'json', 'outFormat': 'xml'}
-12-09-2024 10:42:24 - Utils.MQTT.client - CRITICAL: [WinError 10061] Impossibile stabilire la connessione. Rifiuto persistente del computer di destinazione
-12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
-12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
-12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
-12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
-12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
-12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
-12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
-12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
-12-09-2024 10:42:50 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
-12-09-2024 10:42:50 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
-12-09-2024 10:42:50 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'function': ['extractcols'], 'outTopic': ['o/1', 'o/2', 'o/3'], 'retain': False, 'parameters': ['name', 'city', 'age'], 'inFormat': 'json', 'outFormat': 'xml'}
-12-09-2024 10:42:54 - Utils.MQTT.client - CRITICAL: [WinError 10061] Impossibile stabilire la connessione. Rifiuto persistente del computer di destinazione
+19-10-2024 12:56:56 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+19-10-2024 12:56:56 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:56:56 - Utils.OnFiles.yaml_loader_full - WARNING: the following fields are wrong or missing: ['functions']
+19-10-2024 12:56:56 - Utils.OnFiles.yaml_loader_full - WARNING: document 0 not loaded
+19-10-2024 12:56:56 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:56:56 - Utils.OnFiles.yaml_loader_full - WARNING: the following fields are wrong or missing: ['functions']
+19-10-2024 12:56:56 - Utils.OnFiles.yaml_loader_full - WARNING: document 1 not loaded
+19-10-2024 12:56:56 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+19-10-2024 12:56:56 - Worker.core - DEBUG: clients list: []
+19-10-2024 12:57:33 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+19-10-2024 12:57:33 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:57:33 - Utils.OnFiles.yaml_loader_full - WARNING: the following fields are wrong or missing: ['functions']
+19-10-2024 12:57:33 - Utils.OnFiles.yaml_loader_full - WARNING: document 0 not loaded
+19-10-2024 12:57:33 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:57:33 - Utils.OnFiles.yaml_loader_full - WARNING: the following fields are wrong or missing: ['functions']
+19-10-2024 12:57:33 - Utils.OnFiles.yaml_loader_full - WARNING: document 1 not loaded
+19-10-2024 12:57:33 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+19-10-2024 12:57:33 - Worker.core - DEBUG: clients list: []
+19-10-2024 12:58:03 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+19-10-2024 12:58:03 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:58:03 - Utils.OnFiles.yaml_loader_full - WARNING: the following fields are wrong or missing: ['functions']
+19-10-2024 12:58:03 - Utils.OnFiles.yaml_loader_full - WARNING: document 0 not loaded
+19-10-2024 12:58:03 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:58:03 - Utils.OnFiles.yaml_loader_full - WARNING: the following fields are wrong or missing: ['functions']
+19-10-2024 12:58:03 - Utils.OnFiles.yaml_loader_full - WARNING: document 1 not loaded
+19-10-2024 12:58:03 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+19-10-2024 12:58:03 - Worker.core - DEBUG: clients list: []
+19-10-2024 12:58:24 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+19-10-2024 12:58:24 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:58:24 - Utils.OnFiles.yaml_loader_full - WARNING: the following fields are wrong or missing: ['functions']
+19-10-2024 12:58:24 - Utils.OnFiles.yaml_loader_full - WARNING: document 0 not loaded
+19-10-2024 12:58:24 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:58:24 - Utils.OnFiles.yaml_loader_full - WARNING: the following fields are wrong or missing: ['functions']
+19-10-2024 12:58:24 - Utils.OnFiles.yaml_loader_full - WARNING: document 1 not loaded
+19-10-2024 12:58:24 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+19-10-2024 12:58:24 - Worker.core - DEBUG: clients list: []
+19-10-2024 12:58:52 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+19-10-2024 12:58:52 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:58:52 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+19-10-2024 12:58:52 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+19-10-2024 12:58:52 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
+19-10-2024 12:58:52 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:58:52 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+19-10-2024 12:58:52 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+19-10-2024 12:58:52 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
+19-10-2024 12:58:52 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+19-10-2024 12:58:52 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'broker': 'localhost', 'port': 1883, 'inTopic': 'i/1', 'functions': [{'imagesplit': [3, 5, 'ciao']}], 'outTopic': ['o/1', 'o/2', 'o/3'], 'retain': False, 'format': 'json'}
+19-10-2024 12:58:56 - Utils.MQTT.client - CRITICAL: [WinError 10061] Impossibile stabilire la connessione. Rifiuto persistente del computer di destinazione

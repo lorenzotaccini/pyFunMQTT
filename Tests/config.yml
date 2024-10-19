@@ -2,26 +2,25 @@
  broker: localhost
  port: 1883
  inTopic: i/1
- function:
-   - extractcols
+ functions:
+   - imagesplit:
+     - 3
+     - 5
+     - ciao
  outTopic:
    - o/1
    - o/2
    - o/3
 
  retain: False
- parameters:
-   - name
-   - city
-   - age
  format: json
 ---
  broker: localhost
  port: 1883
  inTopic: i/2
- function:
-  - splittable
+ functions:
+  - splittable:
+      - 2
  outTopic: output/topic
  retain: True
- parameters: ciao
  format: csv

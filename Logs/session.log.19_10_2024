@@ -1,0 +1,54 @@
+19-10-2024 12:18:01 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+19-10-2024 12:18:01 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:18:01 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+19-10-2024 12:18:01 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+19-10-2024 12:18:01 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
+19-10-2024 12:18:01 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:18:01 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+19-10-2024 12:18:01 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+19-10-2024 12:18:01 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
+19-10-2024 12:18:01 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+19-10-2024 12:18:01 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'inTopic': 'i', 'functions': [{'imagesplit': [2]}], 'outTopic': ['o/1', 'o/2', 'o/3'], 'retain': True, 'format': 'png'}
+19-10-2024 12:18:27 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+19-10-2024 12:18:27 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:18:27 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+19-10-2024 12:18:27 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+19-10-2024 12:18:27 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
+19-10-2024 12:18:27 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:18:27 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+19-10-2024 12:18:27 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+19-10-2024 12:18:27 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
+19-10-2024 12:18:27 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+19-10-2024 12:18:27 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'inTopic': 'i', 'functions': [{'imagesplit': None}], 'outTopic': ['o/1', 'o/2', 'o/3'], 'retain': True, 'format': 'png'}
+19-10-2024 12:18:38 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+19-10-2024 12:18:38 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:18:38 - Utils.OnFiles.yaml_loader_full - WARNING: the following fields are wrong or missing: ['functions']
+19-10-2024 12:18:38 - Utils.OnFiles.yaml_loader_full - WARNING: document 0 not loaded
+19-10-2024 12:18:38 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:18:38 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+19-10-2024 12:18:38 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+19-10-2024 12:18:38 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
+19-10-2024 12:18:38 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+19-10-2024 12:18:38 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'inTopic': 'i/2', 'functions': [{'imagesplit': [3]}], 'outTopic': 'output/topic', 'retain': False, 'format': 'png'}
+19-10-2024 12:18:49 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+19-10-2024 12:18:49 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:18:49 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+19-10-2024 12:18:49 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+19-10-2024 12:18:49 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
+19-10-2024 12:18:49 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:18:49 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+19-10-2024 12:18:49 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+19-10-2024 12:18:49 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
+19-10-2024 12:18:49 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+19-10-2024 12:18:49 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'inTopic': 'i', 'functions': [{'imagesplit': None}], 'outTopic': ['o/1', 'o/2', 'o/3'], 'retain': True, 'format': 'png'}
+19-10-2024 12:19:05 - Utils.OnFiles.yaml_loader_full - INFO: Loading configuration file: C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml
+19-10-2024 12:19:05 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:19:05 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+19-10-2024 12:19:05 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+19-10-2024 12:19:05 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 0
+19-10-2024 12:19:05 - Utils.OnFiles.yaml_loader_full - DEBUG: spell checking... 
+19-10-2024 12:19:05 - Utils.OnFiles.yaml_loader_full - DEBUG: configuration file is valid
+19-10-2024 12:19:05 - Utils.OnFiles.yaml_loader_full - DEBUG: ... end of spell checking
+19-10-2024 12:19:05 - Utils.OnFiles.yaml_loader_full - INFO: successfully loaded document 1
+19-10-2024 12:19:05 - Utils.OnFiles.configfile_watchdog - INFO: ----- watchdog is now detecting changes on file C:\Users\lollo\PycharmProjects\pyFunMQTT\Tests\config.yml-----
+19-10-2024 12:19:05 - Utils.MQTT.client - INFO: Starting MQTT client with configuration: {'inTopic': 'i', 'functions': [{'imagesplit': [4, 6, 'ciao']}], 'outTopic': ['o/1', 'o/2', 'o/3'], 'retain': True, 'format': 'png'}

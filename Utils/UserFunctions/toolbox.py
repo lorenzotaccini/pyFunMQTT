@@ -24,7 +24,7 @@ class MethodToolBox:
                 data = self.services[f].serve(conf, data)
 
         # convert in requested output_format and return
-        if isinstance(data, dict):
+        if isinstance(data, dict): #TODO sistemare, il comportamento è cambiato
             for k, v in data.items():
                 data[k] = self.convert_list(conf['format'], v, k)
             return data  # will return a dict where every value is converted

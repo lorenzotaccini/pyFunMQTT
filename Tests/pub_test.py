@@ -44,7 +44,7 @@ if __name__=='__main__':
         "tincidunt id aliquet risus feugiat in ante metus dictum.")
 
     s="ciao"
-    for i in range(5000):
+    for i in range(50000):
         # Our application produce some messages
         print(i)
         msg_info = mqttc.publish("i", "{}. {}".format(i, lorem), qos=0)
