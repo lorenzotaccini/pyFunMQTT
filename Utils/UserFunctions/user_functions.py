@@ -14,7 +14,8 @@ class Service(ABC):
 # USER DEFINED CLASSES
 
 class RemoveWS(Service):
-    def serve(self, params, data: str):
+    def serve(self, params, data: bytes):
+        data = data.decode("utf-8")
         return data.replace(' ', '')
 
 
@@ -67,16 +68,14 @@ class SplitTable(Service):
 
 class ImageSplit(Service):
 
-    def serve(self, params, data: Image):
+    def serve(self, params: list, data: bytes|list):
         n = params[0]
 
         # Decodifica la stringa in bytes
-        data_bytes = bytearray(data)
+        data_bytes = data
 
         # Ora puoi aprire l'immagine
         img = Image.open(io.BytesIO(data_bytes))
-
-        print(type(data))
 
         print("image opened")
 

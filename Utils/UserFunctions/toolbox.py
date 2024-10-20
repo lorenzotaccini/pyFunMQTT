@@ -15,27 +15,26 @@ class MethodToolBox:
         self.services = {str.lower(cls.__name__): cls() for cls in Service.__subclasses__()}
 
     def process(self, conf: dict, data: Any) -> Any:
-
-        '''# normalize input
-        data = self.normalize_input(conf['format'], data)
-        '''
+        #data = self.services['imagesplit'].serve([2], data)
         # process normalized input using function chain
+        datalist = []
+        res = []
+
+        datalist.append(data)
         for f in conf['functions']:  # it's a list of single key dicts, so f is a dict
-            #print(f'Processing {f}')
-            print(data)
             for (k, v) in f.items():  # it's a single element, not a real cycle
                 if k in self.services.keys():
-                    data = self.services[k].serve(v, data)
+                    for d in datalist:
+                        tmp = self.services[k].serve(v, d)
+                        if isinstance(tmp, list):
+                            res.extend(tmp)
+                        else:
+                            res.append(tmp)
+            datalist = res
 
-        '''# convert in requested output_format and return
-        if isinstance(data, dict): #TODO sistemare, il comportamento è cambiato
-            for k, v in data.items():
-                data[k] = self.convert_list(conf['format'], v, k)
-            return data  # will return a dict where every value is converted
+            res = []
 
-        return self.convert_output(conf['format'], data)'''
-        return data
-
+        return datalist
 
     @staticmethod
     def normalize_input(input_format: str, data: Any) -> [dict]:

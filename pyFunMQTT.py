@@ -53,15 +53,16 @@ def setup_logger(verbose, silent, logmessages):
             stdout_handler.setLevel(logging.WARNING)
         logger.addHandler(stdout_handler)
 
-    logfile_handler = TimedRotatingFileHandler(
-        (os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Logs', 'session.log')),
-        when='M',
-        interval=1,  # new file everyday
-        backupCount=7  # keeps the backups for a week before rollover
-    )
-    logfile_handler.suffix = '%d_%m_%Y'
-    logfile_handler.setFormatter(formatter)
-    logger.addHandler(logfile_handler)
+    if logmessages:
+        logfile_handler = TimedRotatingFileHandler(
+            (os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Logs', 'session.log')),
+            when='M',
+            interval=1,  # new file everyday
+            backupCount=7  # keeps the backups for a week before rollover
+        )
+        logfile_handler.suffix = '%d_%m_%Y'
+        logfile_handler.setFormatter(formatter)
+        logger.addHandler(logfile_handler)
 
 
 if __name__ == '__main__':

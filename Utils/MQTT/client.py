@@ -20,6 +20,9 @@ class MQTTClient(mqtt.Client):
     def __init__(self, yl: dict, toolbox: t.MethodToolBox):
         super().__init__(CALLBACK_VERSION)
         self.__config_params = yl
+        if not isinstance(self.__config_params['outTopic'],list):
+            self.__config_params['outTopic']=[str(self.__config_params['outTopic'])]
+
         self.__msg_queue = queue.Queue()
         self.__stop_key = self.generate_stop_key()
 
@@ -33,8 +36,8 @@ class MQTTClient(mqtt.Client):
 
     # Incoming messages are put in a queue to be processed and re-set from publish_message function
     def on_message(self, mqttc, obj, message):
-        payload = message.payload.decode("utf-8")
-        #logger.info(f"Received message on topic {message.topic}: {payload}")
+        payload = message.payload  #.decode("utf-8")
+        #logger.info(f"Received message on topic {message.topic}: {len(payload)}")
 
         self.__msg_queue.put(payload)
 
@@ -61,18 +64,13 @@ class MQTTClient(mqtt.Client):
                 logger.info("quitting has been requested on publishing thread")
                 return
 
-            message = self.process_message(message)
-
-            '''
-            If processed data to publish is a dict (for example, splitting original data and publishing on different topics),
-            key represents the topic on which the message will be published, value is the payload.
-            This will also ignore the list of output topics given in config file.
-            OTHER DATA IS NOT ALLOWED TO BE DICT, IT HAS TO BE IN SOME SORT OF DATA FORMAT LIKE JSON, CSV....
-            '''
-            for i, m in enumerate(message):
-                for o in self.__config_params['outTopic']:
-                    self.client.publish(o + '/' + str(i), m, qos=QOS, retain=self.__config_params['retain'])
-
+            try:
+                message = self.process_message(message)
+                for i, m in enumerate(message):
+                    for o in self.__config_params['outTopic']:
+                        self.client.publish(o + '/' + str(i), m, qos=QOS, retain=self.__config_params['retain'])
+            except Exception as e:
+                logger.error(e)
             self.__msg_queue.task_done()
 
     def get_configuration(self) -> dict:

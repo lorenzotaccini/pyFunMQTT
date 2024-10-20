@@ -4,11 +4,7 @@
  inTopic: i/1
  functions:
    - imagesplit:
-     - 3
-     - 5
-     - ciao
-   - imagesplit:
-     - prova
+     - 2
  outTopic:
    - o/1
    - o/2
@@ -20,8 +16,7 @@
  port: 1883
  inTopic: i/2
  functions:
-  - splittable:
-      - 2
+  - removews:
  outTopic: output/topic
- retain: True
+ retain: False
  format: csv
