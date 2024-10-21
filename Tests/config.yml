@@ -41,3 +41,15 @@
  outTopic: o/6
  retain: False
  format: csv
+---
+ broker: localhost
+ port: 1883
+ inTopic: i/3
+ functions:
+   - extractcols:
+     - 3
+     - 0
+     - 1
+ outTopic: o/7
+ retain: False
+ format: csv

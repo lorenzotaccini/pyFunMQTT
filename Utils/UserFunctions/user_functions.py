@@ -18,6 +18,11 @@ class RemoveWS(Service):
         return data.replace(' ', '')
 
 
+class Upper(Service):
+    def serve(self, params, data: str):
+        return str(data).upper()
+
+
 class SplitCols(Service):
     """
     Divide una tabella (lista di dizionari) in n parti, suddividendo le colonne.
@@ -60,6 +65,7 @@ class SplitCols(Service):
             # Aggiorna l'indice di partenza per la prossima iterazione
             start_index = end_index
 
+        print(sub_tables)
         return sub_tables
 
 
@@ -67,46 +73,46 @@ class SplitRows(Service):
     def serve(self, params: list, data: list) -> Any:
         n = params[0]
 
-        # Calcola il numero di righe per ciascuna sottotabella
         total_rows = len(data)
         avg_rows = total_rows // n
         remainder = total_rows % n
 
-        # Lista per contenere le sottotabelle
         sub_tables = []
 
-        # Inizializza gli indici di partenza e fine per le righe
         start_index = 0
 
         for i in range(n):
-            # Calcola la lunghezza della sottotabella corrente
             end_index = start_index + avg_rows + (1 if i < remainder else 0)
-
-            # Seleziona le righe per la sottotabella corrente
             current_rows = data[start_index:end_index]
-
-            # Aggiungi la sottotabella alla lista
             sub_tables.append(current_rows)
-
-            # Aggiorna l'indice di partenza per la prossima iterazione
             start_index = end_index
 
+        print(sub_tables)
         return sub_tables
+
+
+class ExtractCols(Service):
+    def serve(self, params: list, data: Any) -> Any:
+        columns = list(data[0].keys())
+        filtered_columns = [columns[i] for i in params if i < len(columns)]
+        filtered_data = [
+            [
+                {key: row[key] for key in filtered_columns} for row in data
+            ]
+        ]
+        print(filtered_data)
+        return filtered_data
 
 
 class ImageSplit(Service):
 
-    def serve(self, params: list, data: bytes | list):
+    def serve(self, params: list, data: bytes):
         n = params[0]
 
-        data_bytes = data
-
-        img = Image.open(io.BytesIO(data_bytes))
-
+        img = Image.open(io.BytesIO(data))
         print("image opened")
 
         width, height = img.size
-
         tile_width_base = width // n
         tile_height_base = height // n
 
@@ -117,31 +123,19 @@ class ImageSplit(Service):
             for j in range(n):
                 left = j * tile_width_base
                 upper = i * tile_height_base
-
                 right = (j + 1) * tile_width_base if j < n - 1 else width
-
                 lower = (i + 1) * tile_height_base if i < n - 1 else height
 
-                # Crea il tile corrente
                 tile = img.crop((left, upper, right, lower))
 
                 tile_bytes_io = io.BytesIO()
                 tile.save(tile_bytes_io, format='PNG')
                 tile_bytes = tile_bytes_io.getvalue()
 
-                # Aggiungi il tile alla lista
                 tiles.append(tile_bytes)
 
         # Restituisce i tiles come lista di oggetti bytes
         return tiles
 
 
-class Upper(Service):
-    def serve(self, params, data: str):
-        return str(data).upper()
-
-
-class Extract(Service):
-    def serve(self, params, data: Any):
-        pass
 

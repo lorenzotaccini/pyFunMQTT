@@ -16,9 +16,8 @@ class MethodToolBox:
 
     # process normalized input using function chain
     def process(self, conf: dict, data: Any) -> Any:
-        print(data)
+
         data = self.normalize_input(conf['format'], data)
-        print(data)
 
         datalist = []
         res = []
@@ -71,7 +70,7 @@ class MethodToolBox:
 
     @staticmethod
     def convert_output(output_format: str, data: Any) -> Any:
-
+        print("done")
         if output_format == 'yaml':
             return yaml.dump(data)
 
