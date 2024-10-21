@@ -14,9 +14,12 @@ class MethodToolBox:
     def __init__(self):
         self.services = {str.lower(cls.__name__): cls() for cls in Service.__subclasses__()}
 
+    # process normalized input using function chain
     def process(self, conf: dict, data: Any) -> Any:
-        #data = self.services['imagesplit'].serve([2], data)
-        # process normalized input using function chain
+        print(data)
+        data = self.normalize_input(conf['format'], data)
+        print(data)
+
         datalist = []
         res = []
 
@@ -34,31 +37,44 @@ class MethodToolBox:
 
             res = []
 
-        return datalist
+        for i in range(len(datalist)):
+            datalist[i] = self.convert_output(conf['format'], datalist[i])
+
+        return datalist if len(datalist) > 0 else []
 
     @staticmethod
     def normalize_input(input_format: str, data: Any) -> [dict]:
         if input_format == 'csv':
-            # Assume che input_data sia una stringa CSV
+            data = data.decode('utf-8')
             reader = csv.DictReader(data.splitlines())
             return [row for row in reader]
+
         elif input_format == 'xml':
-            # Assume che input_data sia una stringa XML
             root = et.fromstring(data)
             return [{child.tag: child.text for child in root}]
+
         elif input_format == 'json':
-            # Assume che input_data sia una stringa JSON
             return json.loads(data)
+
         elif input_format == 'yaml':
-            # Assume che input_data sia una stringa YAML
             return yaml.safe_load(data)
+
+        elif input_format == 'png':  # do nothing, we just need raw data
+            return data
+
+        elif input_format == 'txt':
+            data = data.decode('utf-8')
+            return data
+
         else:
             raise ValueError("input input_format is not supported")
 
     @staticmethod
     def convert_output(output_format: str, data: Any) -> Any:
+
         if output_format == 'yaml':
             return yaml.dump(data)
+
         elif output_format == 'xml':
             root = et.Element(tag="data")
             for item in data:
@@ -67,14 +83,21 @@ class MethodToolBox:
                     sub_element = et.SubElement(entry, key)
                     sub_element.text = str(value)
             return et.tostring(root, encoding="unicode")
+
         elif output_format == 'csv':
             keys = data[0].keys()
             output = ",".join(keys) + "\n"
             for item in data:
                 output += ",".join(str(item[key]) for key in keys) + "\n"
             return output
+
         elif output_format == 'json':
             return json.dumps(data, indent=4)
+
+        elif output_format == 'png':
+            return data  # do nothing
+        elif output_format == 'txt':
+            return str(data)  # do nothing
         else:
             raise ValueError("Invalid output input_format. Supported formats: 'yaml', 'xml', 'csv', 'json'")
 
@@ -100,70 +123,3 @@ class MethodToolBox:
             raise ValueError("Format not supported: " + output_format)
 
 
-if __name__ == '__main__':
-    m = MethodToolBox()
-
-    # Esempio di dati CSV
-    csv_data = """name,age,city
-    Alice,30,Roma
-    Bob,25,Milano
-    Charlie,22,Napoli"""
-
-    # Esempio di dati XML
-    xml_data = """<persons>
-        <person>
-            <name>Alice</name>
-            <age>30</age>
-            <city>Roma</city>
-        </person>
-        <person>
-            <name>Bob</name>
-            <age>25</age>
-            <city>Milano</city>
-        </person>
-        <person>
-            <name>Charlie</name>
-            <age>22</age>
-            <city>Napoli</city>
-        </person>
-    </persons>"""
-
-    # Esempio di dati JSON
-    import json
-
-    json_data = [
-        {
-            "name": "Alice",
-            "age": 30,
-            "city": "Roma"
-        },
-        {
-            "name": "Bob",
-            "age": 25,
-            "city": "Milano"
-        },
-        {
-            "name": "Charlie",
-            "age": 22,
-            "city": "Napoli"
-        }
-    ]
-
-    # Esempio di dati YAML
-    import yaml
-
-    yaml_data = """
-    - name: Alice
-      age: 30
-      city: Roma
-    - name: Bob
-      age: 25
-      city: Milano
-    - name: Charlie
-      age: 22
-      city: Napoli
-    """
-    print(m.normalize_input('csv', csv_data))
-    print(m.normalize_input('xml', xml_data))
-    print(m.normalize_input('yaml', yaml_data))
-    print(m.normalize_input('json', json.dumps(json_data)))

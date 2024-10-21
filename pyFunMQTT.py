@@ -11,17 +11,6 @@ from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
 def setup_logger(verbose, silent, logmessages):
     logger = logging.getLogger()
 
-    '''
-    # add level MESSAGE to the logger, his numeric value will be 5, the lowest
-    msg_log_lvl = 5
-    
-    def message(self, msg, *args, **kws):
-        if self.isEnabledFor(msg_log_lvl):
-            self._log(msg_log_lvl, msg, args, **kws)
-
-    logging.addLevelName(msg_log_lvl, "MESSAGE")
-    logging.Logger.message = message
-    '''
 
     logger.setLevel(logging.DEBUG)  # setup logging level
 
@@ -30,19 +19,6 @@ def setup_logger(verbose, silent, logmessages):
         datefmt='%d-%m-%Y %H:%M:%S'
     )
 
-    '''
-    if logmessages:
-        # create a handler for logging messages, with rotation and dimension for each file capped to 3MB
-        msgs_file_handler = RotatingFileHandler(
-            (os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Logs', 'msgs.log')),
-            maxBytes=3 * 1024 * 1024,
-            backupCount=3
-        )
-        msgs_file_handler.setLevel(logging.MESSAGE)
-        msgs_file_handler.addFilter(lambda record: record.levelno < logging.DEBUG)  # only log MESSAGE
-        msgs_file_handler.setFormatter(formatter)
-        logger.addHandler(msgs_file_handler)
-    '''
 
     if not silent:
         stdout_handler = logging.StreamHandler(sys.stdout)

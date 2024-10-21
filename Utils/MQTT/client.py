@@ -36,10 +36,9 @@ class MQTTClient(mqtt.Client):
 
     # Incoming messages are put in a queue to be processed and re-set from publish_message function
     def on_message(self, mqttc, obj, message):
-        payload = message.payload  #.decode("utf-8")
         #logger.info(f"Received message on topic {message.topic}: {len(payload)}")
 
-        self.__msg_queue.put(payload)
+        self.__msg_queue.put(message.payload)
 
     def on_connect(self, mqttc, obj, flags, reason_code, properties):
         logger.info(f"Connected with result code {reason_code}")
@@ -52,7 +51,6 @@ class MQTTClient(mqtt.Client):
         self.stop()
 
     def process_message(self, payload):
-        # TODO as of now, messages are strings and not serialized data files such as json yaml exc...
         return self.toolbox.process(self.__config_params,
                                     payload)
 
@@ -64,13 +62,13 @@ class MQTTClient(mqtt.Client):
                 logger.info("quitting has been requested on publishing thread")
                 return
 
-            try:
-                message = self.process_message(message)
-                for i, m in enumerate(message):
-                    for o in self.__config_params['outTopic']:
-                        self.client.publish(o + '/' + str(i), m, qos=QOS, retain=self.__config_params['retain'])
-            except Exception as e:
-                logger.error(e)
+            #try:
+            message = self.process_message(message)
+            for i, m in enumerate(message):
+                for o in self.__config_params['outTopic']:
+                    self.client.publish(o + '/' + str(i), m, qos=QOS, retain=self.__config_params['retain'])
+            #except Exception as e:
+             #   logger.error(e)
             self.__msg_queue.task_done()
 
     def get_configuration(self) -> dict:

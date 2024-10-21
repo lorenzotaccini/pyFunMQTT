@@ -10,13 +10,34 @@
    - o/2
    - o/3
  retain: False
- format: json
+ format: png
 ---
  broker: localhost
  port: 1883
  inTopic: i/2
  functions:
-  - removews:
- outTopic: output/topic
+   - removews:
+   - upper:
+ outTopic: o/4
+ retain: False
+ format: txt
+---
+ broker: localhost
+ port: 1883
+ inTopic: i/3
+ functions:
+   - splitcols:
+     - 3
+ outTopic: o/5
+ retain: False
+ format: csv
+---
+ broker: localhost
+ port: 1883
+ inTopic: i/3
+ functions:
+   - splitrows:
+     - 3
+ outTopic: o/6
  retain: False
  format: csv

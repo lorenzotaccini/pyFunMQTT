@@ -39,7 +39,7 @@ class YamlLoader:
             'outTopic': r"^([a-zA-Z0-9_\-#]+/?)*[a-zA-Z0-9_\-#]+$",
             'retain': re.compile(r"^true$|^false$", re.IGNORECASE),
             'functions': r"^([a-zA-Z0-9_\-])+$",
-            'format': r'\b(json|xml|yaml|csv|png)\b'
+            'format': r'\b(json|xml|yaml|csv|png|txt)\b'
         }
 
         logger.debug("spell checking... ")
